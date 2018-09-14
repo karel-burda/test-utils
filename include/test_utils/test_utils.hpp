@@ -10,16 +10,12 @@ namespace burda
 {
 namespace test_utils
 {
-template <typename class_type>
-void assert_construction_and_destruction(const bool call_destructor = true)
+template <typename class_type, typename... args>
+void assert_construction_and_destruction(args... a)
 {
-    ASSERT_NO_THROW(class_type instance);
+    ASSERT_NO_THROW(class_type instance{ std::forward<args>(a)... });
 
-    class_type instance;
-    if (call_destructor)
-    {
-        EXPECT_NO_THROW(instance.~class_type());
-    }
+    class_type instance{ std::forward<args>(a)... };
 }
 
 void check_if_mutex_is_owned(std::mutex & mutex, bool should_be_owned)

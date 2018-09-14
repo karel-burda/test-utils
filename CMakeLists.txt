@@ -9,10 +9,10 @@ option(UNIT-TESTS "Build with unit tests" OFF)
 _print_project_version()
 
 set(HEADERS
-    include/test-utils/make_all_members_public.hpp
-    include/test-utils/static_class_assertions.hpp
-    include/test-utils/test_utils.hpp
-    include/test-utils/time_utils.hpp)
+    include/test_utils/make_all_members_public.hpp
+    include/test_utils/static_class_assertions.hpp
+    include/test_utils/test_utils.hpp
+    include/test_utils/time_utils.hpp)
 
 set(OTHER
     #README.md
