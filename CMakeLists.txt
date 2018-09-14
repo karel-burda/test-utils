@@ -15,8 +15,8 @@ set(HEADERS
     include/test_utils/time_utils.hpp)
 
 set(OTHER
-    #README.md
-    #.travis.yml
+    README.md
+    .travis.yml
     ${PROJECT_NAME}-config.cmake.in)
 
 add_custom_target(${PROJECT_NAME} SOURCES ${HEADERS} ${OTHER})
