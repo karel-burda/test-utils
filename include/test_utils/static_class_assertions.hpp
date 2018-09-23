@@ -6,14 +6,14 @@ namespace burda
 {
 namespace test_utils
 {
-template <typename class_type, bool constructible>
+template <typename class_type, const bool constructible>
 void assert_default_constructibility()
 {
     static_assert(std::is_default_constructible<class_type>::value == constructible,
                   "Given class_type has incorrect constructibility");
 }
 
-template <typename class_type, bool constructible>
+template <typename class_type, const bool constructible>
 void assert_move_constructibility()
 {
     static_assert(std::is_move_constructible<class_type>::value == constructible,
@@ -22,7 +22,7 @@ void assert_move_constructibility()
                   "Given class_type has incorrect move assignability");
 }
 
-template <typename class_type, bool constructible>
+template <typename class_type, const bool constructible>
 void assert_copy_constructibility()
 {
     static_assert(std::is_copy_constructible<class_type>::value == constructible,
