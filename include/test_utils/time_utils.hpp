@@ -12,7 +12,7 @@ namespace test_utils
 {
 using clock = std::chrono::steady_clock;
 
-void assert_that_elapsed_time_in_tolerance(std::chrono::duration<double> elapsed,
+inline void assert_that_elapsed_time_in_tolerance(std::chrono::duration<double> elapsed,
                                            std::chrono::duration<double> lower_bound,
                                            std::chrono::duration<double> upper_bound,
                                            std::chrono::duration<double> epsilon = std::chrono::milliseconds{ 10 })
@@ -21,7 +21,7 @@ void assert_that_elapsed_time_in_tolerance(std::chrono::duration<double> elapsed
     ASSERT_LE(elapsed, upper_bound);
 }
 
-std::chrono::duration<double> measure_time(std::function<void()> action)
+inline std::chrono::duration<double> measure_time(std::function<void()> action)
 {
     const auto start = clock::now();
 

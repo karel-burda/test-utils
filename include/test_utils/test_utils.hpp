@@ -18,7 +18,7 @@ void assert_construction_and_destruction(args... a)
     class_type instance{ std::forward<args>(a)... };
 }
 
-void check_if_mutex_is_owned(std::mutex & mutex, bool should_be_owned)
+inline void check_if_mutex_is_owned(std::mutex & mutex, bool should_be_owned)
 {
     const auto is_mutex_owned = !mutex.try_lock();
     EXPECT_EQ(is_mutex_owned, should_be_owned);
