@@ -27,6 +27,6 @@ jobs:
          - cppcheck --enable=all -I include --language=c++ --platform=unix64 --std=c++11 --check-config --suppress=missingIncludeSystem -v ./tests
 
          - cmake --build build --target run-all-tests-verbose --config RelWithDebInfo
-         #- coveralls -e ./build/gtest-src -e build/demo-library -e ./build/CMakeFiles -e ./tests/unit -e ./example -e cmake-helpers -e demo-library -e test-utils --gcov-options '\-lp'
+         - coveralls -e ./build/gtest-src -e ./build/CMakeFiles -e ./tests/unit -e cmake-helpers --gcov-options '\-lp'
 
          - set +e
