@@ -2,6 +2,12 @@
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=develop)](https://travis-ci.org/karel-burda/cmake-helpers)
 
+# Important
+This project contains git sub-modules that are needed for building example and tests.
+
+If you just want to use the implementation, you can clone **without** sub-modules. In case you want to build example, tests, or use CMake, please, be sure to clone the repository
+with `--recurse-submodules` or `--recursive` on older versions of git. Alternatively, you can clone without sub-modules and initialize these later.
+
 # Introduction
 `test-utils` features small test-related functions and macros (based on the gtest) I'm using across my project.
 
