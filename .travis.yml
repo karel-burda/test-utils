@@ -1,16 +1,9 @@
 stages:
-  - generation
-
-notifications:
-  email:
-    on_success: never
-    on_failure: always
-    recipients:
-      - karelburda89@gmail.com
+  - tests (C++14) -- cppcheck, build (linux, gcc5), tests
 
 jobs:
   include:
-     - stage: generation
+     - stage:  tests (C++14) -- cppcheck, build (linux, gcc5), tests
        sudo: required
        dist: trusty
        language: cpp
@@ -22,10 +15,18 @@ jobs:
              - ubuntu-toolchain-r-test
            packages:
              - g++-5
+             - cppcheck
+       before_install:
+         - pip install --user cpp-coveralls
        install: export CXX="g++-5"
        script:
          - set -e
 
-         - cmake -Bbuild -H.
+         - cmake -Bbuild -H. -DUNIT-TESTS:BOOL=ON -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo -DCOVERAGE:BOOL=ON
+
+         - cppcheck --enable=all -I include --language=c++ --platform=unix64 --std=c++11 --check-config --suppress=missingIncludeSystem -v ./tests
+
+         - cmake --build build --target run-all-tests-verbose --config RelWithDebInfo
+         #- coveralls -e ./build/gtest-src -e build/demo-library -e ./build/CMakeFiles -e ./tests/unit -e ./example -e cmake-helpers -e demo-library -e test-utils --gcov-options '\-lp'
 
          - set +e
