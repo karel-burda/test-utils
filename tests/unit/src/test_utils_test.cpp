@@ -1,3 +1,4 @@
+#include <mutex>
 #include <string>
 
 #include <gtest/gtest.h>
@@ -26,5 +27,18 @@ TEST(test_utils, assert_construction_and_destruction)
 
     EXPECT_NO_THROW(test_utils::assert_construction_and_destruction<Foo>());
     EXPECT_NO_THROW(test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f));
+}
+
+TEST(test_utils, check_if_mutex_is_owned)
+{
+    std::mutex lock;
+
+    EXPECT_NO_THROW(test_utils::check_if_mutex_is_owned(lock, false));
+
+    lock.lock();
+
+    EXPECT_NO_THROW(test_utils::check_if_mutex_is_owned(lock, true));
+
+    lock.unlock();
 }
 }
