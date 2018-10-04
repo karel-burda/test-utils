@@ -16,7 +16,8 @@ add_executable(${PROJECT_NAME} "")
 target_sources(
     ${PROJECT_NAME}
         PUBLIC
-            src/test_utils_test.cpp)
+            src/test_utils_test.cpp
+            src/time_utils_test.cpp)
 
 add_dependencies(${PROJECT_NAME} gtest-build)
 
