@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-0.5.0-green.svg)
+![Version](https://img.shields.io/badge/version-0.6.0-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=develop)](https://travis-ci.org/karel-burda/cmake-helpers)
 [![Coverage Status](https://coveralls.io/repos/github/karel-burda/test-utils/badge.svg?branch=develop)](https://coveralls.io/github/karel-burda/test-utils?branch=develop)
