@@ -16,6 +16,7 @@ add_executable(${PROJECT_NAME} "")
 target_sources(
     ${PROJECT_NAME}
         PUBLIC
+            src/make_all_members_public_test.cpp
             src/static_class_assertions_test.cpp
             src/test_utils_test.cpp
             src/time_utils_test.cpp)
