@@ -29,7 +29,7 @@ For full examples, see implementation of [tests](tests/unit).
 
 ### make_all_members_public.hpp
 ```cpp
-// After following include, every member from class or struct that goes after this include will have public visibility
+// After following include, every member from class or struct that goes after this will have public visibility
 #include <test_utils/make_all_members_public.hpp>
 
 #include "some_class.hpp"
@@ -77,7 +77,8 @@ struct Foo
     }
 };
 
-// This uses "ASSERT_NO_THROW" macro from the gtest, creates an instance of the object and destructor is called as well (when function going out-of-scope)
+// This uses "ASSERT_NO_THROW" macro from the gtest, creates an instance of the object and destructor
+// is called as well (when function going out-of-scope)
 test_utils::assert_construction_and_destruction<Foo>();
 test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
 ```
