@@ -33,11 +33,14 @@ TEST(make_all_members_public, static_assertions)
     };
 
     // make sure all members are accessible
+
     class_with_protected_and_private instance;
     EXPECT_EQ(instance.method_public(), true);
     EXPECT_EQ(instance.member_public, false);
+
     EXPECT_EQ(instance.method_protected(), true);
     EXPECT_EQ(instance.member_protected, false);
+
     EXPECT_EQ(instance.method_private(), true);
     EXPECT_EQ(instance.member_private, false);
 }
