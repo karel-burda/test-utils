@@ -91,7 +91,7 @@ test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
 test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
 
 // This should yield around 4 seconds, "duration" is of type "std::chrono<double>"
- const auto duration = test_utils::measure_time([]() { std::this_thread::sleep_for(4s); });
+ const auto duration = test_utils::measure_duration([]() { std::this_thread::sleep_for(4s); });
 ```
 
 # Build Process

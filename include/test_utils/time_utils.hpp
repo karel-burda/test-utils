@@ -20,7 +20,7 @@ inline void assert_that_elapsed_time_in_tolerance(std::chrono::duration<double> 
     ASSERT_LE(elapsed, upper_bound);
 }
 
-inline std::chrono::duration<double> measure_time(std::function<void()> action)
+inline std::chrono::duration<double> measure_duration(std::function<void()> action)
 {
     const auto start = clock::now();
 
