@@ -20,8 +20,8 @@ TEST(static_class_assertions, assertions)
         struct_with_rule_of_five_enabled(struct_with_rule_of_five_enabled &&) = default;
     };
 
-    test_utils::assert_default_constructibility<struct_with_rule_of_five_enabled, true>;
-    test_utils::assert_copy_constructibility<struct_with_rule_of_five_enabled, true>;
-    test_utils::assert_move_constructibility<struct_with_rule_of_five_enabled, true>;
+    test_utils::assert_default_constructibility<struct_with_rule_of_five_enabled, true>();
+    test_utils::assert_copy_constructibility<struct_with_rule_of_five_enabled, true>();
+    test_utils::assert_move_constructibility<struct_with_rule_of_five_enabled, true>();
 }
 }
