@@ -15,9 +15,7 @@ TEST(test_utils, assert_construction_and_destruction)
 
     struct Foo
     {
-        Foo()
-        {
-        }
+        Foo() = default;
 
         Foo(std::string, float)
         {
@@ -37,7 +35,5 @@ TEST(test_utils, check_if_mutex_is_owned)
     lock.lock();
 
     EXPECT_NO_THROW(test_utils::check_if_mutex_is_owned(lock, true));
-
-    lock.unlock();
 }
 }
