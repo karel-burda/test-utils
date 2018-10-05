@@ -15,7 +15,7 @@ with `--recurse-submodules` or `--recursive` on older versions of git. Alternati
 
 Implementation is header-only.
 
-See [include/test-utils](include/test-utils) for main functionality and [tests/unit](tests/unit) for unit tests.
+See [include/test_utils](include/test_utils) for main functionality and [tests/unit](tests/unit) for unit tests.
 
 # Usage
 In order to use the `test-utils`, it's the `include` directory that matters. Just make sure that the header search path is pointing to the [include](include) directory located in the root directory.
@@ -29,12 +29,12 @@ For full examples, see implementation of [tests](tests/unit).
 
 ### make_all_members_public.hpp
 ```cpp
-// After following include, every member from class or struct that goes after this will have public visibility
+// after following include, every member from class or struct that goes after this will have public visibility
 #include <test_utils/make_all_members_public.hpp>
 
 #include "some_class.hpp"
 
-// Now we have access to protected and private members of some_class
+// now we have access to protected and private members of some_class
 ```
 
 ### static_class_assertions.hpp
@@ -53,7 +53,7 @@ struct some_struct
     some_struct(some_struct &&) = delete;
 };
 
-// Following compile time assertions use "static_assert", "is_default_constructible<T>", etc.
+// following compile time assertions use "static_assert", "is_default_constructible<T>", etc.
 // "some_struct" should have default constructor
 test_utils::assert_default_constructibility<some_struct, true>();
 // "some_struct" should be copy constructible
@@ -77,7 +77,7 @@ struct Foo
     }
 };
 
-// This uses "ASSERT_NO_THROW" macro from the gtest, creates an instance of the object and destructor
+// this uses "ASSERT_NO_THROW" macro from the gtest, creates an instance of the object and destructor
 // is called as well (when function going out-of-scope)
 test_utils::assert_construction_and_destruction<Foo>();
 test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
@@ -87,15 +87,15 @@ test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
 ```cpp
 #include <test_utils/time_utils.hpp>
 
-// Calls test macros "ASSERT_GE" and "ASSERT_LE" in its implementation
+// calls test macros "ASSERT_GE" and "ASSERT_LE" in its implementation
 test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
 
-// This should yield around 4 seconds, "duration" is of type "std::chrono<double>"
+// this should yield around 4 seconds, "duration" is of type "std::chrono<double>"
  const auto duration = test_utils::measure_duration([]() { std::this_thread::sleep_for(4s); });
 ```
 
 # Build Process
-For generation of project containing the implementation and tests, run the cmake in the top-level directory like this:
+For generation of project containing the implementation, run the cmake in the top-level directory like this:
 
 `cmake .`
 
@@ -105,9 +105,17 @@ I personally prefer to specify a separate build directory explicitly:
 
 You can of course specify ordinary cmake options like build type (debug, release with debug info, ...), used generator, etc.
 
-# Tests
-For unit tests, execute
+# Unit Tests
+For building tests, run cmake with the option `UNIT-TESTS=ON`:
 
-`cmake . -DUNIT_TESTS:BOOL=ON`
+`cmake -Bbuild -H. -DUNIT-TESTS:BOOL=ON`
 
-Tests are being run in the Continuous Integration environment and code coverage is inspected.
+# Continuous Integration
+Continuous Integration is now being run Linux (with GCC 5.x) on Travis: https://travis-ci.org/karel-burda/test-utils.
+
+Compilers are set-up to treat warnings as errors and with pedantic warning level. Targets are built in a release mode with debug symbols and code coverage measure).
+
+The project is using just one stage (because of the overhead of spawning other stages)
+* `tests (C++14)` -- cppcheck, build (linux, gcc5), tests
+
+Project uses [coveralls.io](https://coveralls.io/github/karel-burda/test-utils) for code coverage summary and [codacy](https://app.codacy.com/app/karel-burda/test-utils/dashboard) for the coding style and additional static analysis.
