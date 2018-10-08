@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
-project(test-utils VERSION 0.9.0 LANGUAGES CXX)
+project(test-utils VERSION 0.9.1 LANGUAGES CXX)
 
 include("cmake-helpers/cmake-helpers/messages.cmake")
 include("cmake-helpers/cmake-helpers/standard-settings.cmake")
@@ -27,6 +27,6 @@ add_custom_target(${PROJECT_NAME} SOURCES ${HEADERS} ${OTHER})
 
 configure_file(${PROJECT_NAME}-config.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake" @ONLY)
 
-if (UNIT-TESTS)
+if (UNIT-TESTS AND NOT USED-AS-SUBMODULE)
     add_subdirectory(tests/unit)
 endif()
