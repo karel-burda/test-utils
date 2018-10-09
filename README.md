@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-0.9.0-green.svg)
+![Version](https://img.shields.io/badge/version-0.9.2-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=master)](https://travis-ci.org/karel-burda/test-utils)
 [![Coverage Status](https://coveralls.io/repos/github/karel-burda/test-utils/badge.svg?branch=master)](https://coveralls.io/github/karel-burda/test-utils?branch=master)
@@ -55,11 +55,11 @@ struct some_struct
 
 // following compile time assertions use "static_assert", "is_default_constructible<T>", etc.
 // "some_struct" should have default constructor
-test_utils::assert_default_constructibility<some_struct, true>();
+burda::test_utils::assert_default_constructibility<some_struct, true>();
 // "some_struct" should be copy constructible
-test_utils::assert_copy_constructibility<some_struct, true>();
+burda::test_utils::assert_copy_constructibility<some_struct, true>();
 // "some_struct" should not be move constructible
-test_utils::assert_move_constructibility<some_struct, false>();
+burda::test_utils::assert_move_constructibility<some_struct, false>();
 ```
 
 ### test_utils.hpp
@@ -79,8 +79,8 @@ struct Foo
 
 // this uses "ASSERT_NO_THROW" macro from the gtest, creates an instance of the object and destructor
 // is called as well (when function going out-of-scope)
-test_utils::assert_construction_and_destruction<Foo>();
-test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
+burda::test_utils::assert_construction_and_destruction<Foo>();
+burda::test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
 ```
 
 ### time_utils.hpp
@@ -88,10 +88,7 @@ test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
 #include <test_utils/time_utils.hpp>
 
 // calls test macros "ASSERT_GE" and "ASSERT_LE" in its implementation
-test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
-
-// this should yield around 4 seconds, "duration" is of type "std::chrono<double>"
- const auto duration = test_utils::measure_duration([]() { std::this_thread::sleep_for(4s); });
+burda::test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
 ```
 
 # Build Process
