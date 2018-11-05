@@ -18,16 +18,36 @@ Implementation is header-only.
 See [include/test_utils](include/test_utils) for main functionality and [tests/unit](tests/unit) for unit tests.
 
 # Usage
-In order to use the `test-utils`, it's the `include` directory that matters. Just make sure that the header search path is pointing to the [include](include) directory located in the root directory.
+There basically these options when it comes to build system integration:
 
-`test-utils` uses macros from the `gtest`, so include path to the `gtest` should also be visible in the final project.
+1. CMake
+Recommended option.
 
-You can use the provided CMake package configuration at [test-utils-config.cmake.in](test-utils-config.cmake.in).
+Just integrate the `test-utils` to the CMake build system of your project in the CMakeLists by:
+
+`add_subdirectory(<path-to-test-utils>)`
+
+The generated configuration file `test-utils-config.cmake` will be automatically created in the binary directory (exact location depends on settings of your project).
+
+Configuration file contains exported target `burda::test-utils` and also important build-related information such as header search paths, source files, required compiler settings, etc.
+
+You can search for this exported target in your CMakeLists like this:
+
+```cmake
+find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
+# Alternatively assuming that the "test-utils_DIR" variable is set: find_package(test-utils CONFIG)
+```
+
+2. Manual
+It's mainly the `include` directory that matters so make sure, the compiler will see it.
+
+You might have to manually set certain compiler (not only) settings though.
 
 ## Examples
 For full examples, see implementation of [tests](tests/unit).
 
-### make_all_members_public.hpp
+### [make_all_members_public.hpp](include/test-utils/make_all_members_public.cpp)
+Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_members_public_test.cpp)
 ```cpp
 // after following include, every member from class or struct that goes after this will have public visibility
 #include <test_utils/make_all_members_public.hpp>
@@ -37,7 +57,8 @@ For full examples, see implementation of [tests](tests/unit).
 // now we have access to protected and private members of some_class
 ```
 
-### static_class_assertions.hpp
+### [static_class_assertions.hpp](include/test-utils/static_class_assertions.cpp)
+Test implemented at: [static_class_assertions_test.cpp](tests/unit/src/static_class_assertions_test.cpp)
 ```cpp
 #include <test_utils/static_class_assertions.hpp>
 
@@ -62,7 +83,8 @@ burda::test_utils::assert_copy_constructibility<some_struct, true>();
 burda::test_utils::assert_move_constructibility<some_struct, false>();
 ```
 
-### test_utils.hpp
+### [test_utils.hpp](include/test-utils/test_utils.cpp)
+Test implemented at: [test_utils_test.cpp](tests/unit/src/test_utils_test.cpp)
 ```cpp
 #include <test_utils/test_utils.hpp>
 
@@ -83,7 +105,8 @@ burda::test_utils::assert_construction_and_destruction<Foo>();
 burda::test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
 ```
 
-### time_utils.hpp
+### [time_utils.hpp](include/test-utils/time_utils.cpp)
+Test implemented at: [time_utils_test.cpp](tests/unit/src/time_utils_test.cpp)
 ```cpp
 #include <test_utils/time_utils.hpp>
 
@@ -103,9 +126,18 @@ I personally prefer to specify a separate build directory explicitly:
 You can of course specify ordinary cmake options like build type (debug, release with debug info, ...), used generator, etc.
 
 # Unit Tests
-For building tests, run cmake with the option `UNIT-TESTS=ON`:
+For building tests, run cmake in the source directory [tests/unit](tests/unit):
 
-`cmake -Bbuild -H. -DUNIT-TESTS:BOOL=ON`
+```cmake
+cmake -Bbuild -H.
+# You can also add coverage by appending "-DCOVERAGE:BOOL=ON"
+cmake -Bbuild/tests/unit -Htests/unit -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
+cmake --build build/tests/unit --config RelWithDebInfo
+# Or you can build target "run-all-tests-verbose" that will also run the tests with certain timeout:
+# cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDebInfo
+```
+
+For more info, see (.travis.yml)[.travis.yml].
 
 # Continuous Integration
 Continuous Integration is now being run Linux (with GCC 5.x) on Travis: https://travis-ci.org/karel-burda/test-utils.
