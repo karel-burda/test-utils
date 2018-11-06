@@ -1,6 +1,9 @@
 stages:
   - tests (C++14) -- cppcheck, build (linux, gcc5), tests
 
+git:
+  depth: 1
+
 jobs:
   include:
      - stage:  tests (C++14) -- cppcheck, build (linux, gcc5), tests
