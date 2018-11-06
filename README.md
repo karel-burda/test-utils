@@ -27,10 +27,9 @@ There are basically ways options of how to use this package that depends on your
 
 ### A) Integration into generation of your project
 
-Call `add_subdirectory(...)` directly in your CMake;
+Call `add_subdirectory(...)` directly in your CMakeLists;
 
 ```cmake
-# This is your CMakeLists.txt
 (...)
 
 add_executable("my-project" main.cpp)
@@ -56,10 +55,9 @@ cmake <path-to-test-utils>
 
 This will create automatically generated package configuration file `test-utils-config.cmake` that contains exported target and all important information.
 
-Then you can do this in your CMake:
+Then you can do this in your CMakeLists:
 
 ```cmake
-# This is your CMakeLists.txt
 (...)
 
 add_executable("my-project" main.cpp)
@@ -68,7 +66,7 @@ find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
 # Alternatively assuming that the "test-utils_DIR" variable is set: find_package(test-utils CONFIG)
 
 # This will import header search paths, compile definitions and other dependencies of the test-utils as well
-target_link_libraries("my-project" test-utils)
+target_link_libraries("my-project" burda::test-utils)
 ```
 
 ## 2. Manual Way
@@ -147,17 +145,6 @@ Test implemented at: [time_utils_test.cpp](tests/unit/src/time_utils_test.cpp)
 burda::test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
 ```
 
-# Build Process
-For generation of project containing the implementation, run the cmake in the top-level directory like this:
-
-`cmake .`
-
-I personally prefer to specify a separate build directory explicitly:
-
-`cmake -Bbuild -H.`
-
-You can of course specify ordinary cmake options like build type (debug, release with debug info, ...), used generator, etc.
-
 # Unit Tests
 For building tests, run cmake in the source directory [tests/unit](tests/unit):
 
@@ -170,7 +157,7 @@ cmake --build build/tests/unit --config RelWithDebInfo
 # cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDebInfo
 ```
 
-For more info, see (.travis.yml)[.travis.yml].
+For more info, see [.travis.yml](.travis.yml).
 
 # Continuous Integration
 Continuous Integration is now being run Linux (with GCC 5.x) on Travis: https://travis-ci.org/karel-burda/test-utils.
