@@ -18,23 +18,21 @@ Implementation is header-only.
 See [include/test_utils](include/test_utils) for main functionality and [tests/unit](tests/unit) for unit tests.
 
 # Usage
-There basically these options when it comes to build system integration:
+There are basically these options when it comes to build system integration:
 
 ## 1. CMake Way
 Recommended option.
 
-There are basically ways options of how to use this package that depends on your preferences our build architecture:
+There are essentially these ways options of how to use this package that depends on your preferences our build architecture:
 
-### A) Integration into generation of your project
+### A) Generate directly
 
 Call `add_subdirectory(...)` directly in your CMakeLists;
 
 ```cmake
-(...)
-
 add_executable("my-project" main.cpp)
 
-# So this can be for example: add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils EXCLUDE_FROM_ALL)
+# Example add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils EXCLUDE_FROM_ALL)
 add_subdirectory(<path-to-test-utils>)
 
 if (TARGET test-utils)
@@ -45,11 +43,11 @@ if (TARGET test-utils)
 endif()
 ```
 
-### B) Generate test-utils separately
+### B) Generate separately
 
 Generation phase on the test-utils is run separately, that means that you run:
-```bash
-# So this can be e.g.: cmake -Bbuild/test-utils -Htest-utils in the root of your project 
+```cmake
+# Example: cmake -Bbuild/test-utils -Htest-utils in the root of your project 
 cmake <path-to-test-utils>
 ```
 
@@ -58,8 +56,6 @@ This will create automatically generated package configuration file `test-utils-
 Then you can do this in your CMakeLists:
 
 ```cmake
-(...)
-
 add_executable("my-project" main.cpp)
 
 find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
