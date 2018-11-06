@@ -31,6 +31,6 @@ jobs:
          - cmake -Bbuild/tests/unit -Htests/unit -Dtest-utils_DIR:PATH=$(pwd)/build -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo -DCOVERAGE:BOOL=ON
          - cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDebInfo
 
-         - coveralls -e ./build/tests/unit/gtest-src -e ./build/CMakeFiles e ./build/tests/unit/CMakeFiles -e ./tests/unit -e cmake-helpers --gcov-options '\-lp'
+         - coveralls -e ./build/tests/unit/gtest-src -e ./build/CMakeFiles -e ./build/tests/unit/CMakeFiles -e ./tests/unit -e cmake-helpers --gcov-options '\-lp'
 
          - set +e
