@@ -20,25 +20,58 @@ See [include/test_utils](include/test_utils) for main functionality and [tests/u
 # Usage
 There basically these options when it comes to build system integration:
 
-1. CMake
+## 1. CMake Way
 Recommended option.
 
-Just integrate the `test-utils` to the CMake build system of your project in the CMakeLists by:
+There are basically ways options of how to use this package that depends on your preferences our build architecture:
 
-`add_subdirectory(<path-to-test-utils>)`
+### A) Integration into generation of your project
 
-The generated configuration file `test-utils-config.cmake` will be automatically created in the binary directory (exact location depends on settings of your project).
-
-Configuration file contains exported target `burda::test-utils` and also important build-related information such as header search paths, source files, required compiler settings, etc.
-
-You can search for this exported target in your CMakeLists like this:
+Call `add_subdirectory(...)` directly in your CMake;
 
 ```cmake
-find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
-# Alternatively assuming that the "test-utils_DIR" variable is set: find_package(test-utils CONFIG)
+# This is your CMakeLists.txt
+(...)
+
+add_executable("my-project" main.cpp)
+
+# So this can be for example: add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils EXCLUDE_FROM_ALL)
+add_subdirectory(<path-to-test-utils>)
+
+if (TARGET test-utils)
+    add_library(burda::test-utils ALIAS test-utils)
+
+    # This will import header search paths, compile definitions and other dependencies of the test-utils as well
+    target_link_libraries("my-project" test-utils)
+endif()
 ```
 
-2. Manual
+### B) Generate test-utils separately
+
+Generation phase on the test-utils is run separately, that means that you run:
+```bash
+# So this can be e.g.: cmake -Bbuild/test-utils -Htest-utils in the root of your project 
+cmake <path-to-test-utils>
+```
+
+This will create automatically generated package configuration file `test-utils-config.cmake` that contains exported target and all important information.
+
+Then you can do this in your CMake:
+
+```cmake
+# This is your CMakeLists.txt
+(...)
+
+add_executable("my-project" main.cpp)
+
+find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
+# Alternatively assuming that the "test-utils_DIR" variable is set: find_package(test-utils CONFIG)
+
+# This will import header search paths, compile definitions and other dependencies of the test-utils as well
+target_link_libraries("my-project" test-utils)
+```
+
+## 2. Manual Way
 It's mainly the `include` directory that matters so make sure, the compiler will see it.
 
 You might have to manually set certain compiler (not only) settings though.

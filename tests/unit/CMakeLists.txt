@@ -19,7 +19,7 @@ target_sources(
             src/time_utils_test.cpp)
 
 
-find_package(test-utils CONFIG HINTS ${CMAKE_BINARY_DIR}/../.. REQUIRED)
+find_package(test-utils CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} burda::test-utils)
 
 _gtest_bootstrap_and_link(${PROJECT_NAME} "release-1.8.1" "Release")
