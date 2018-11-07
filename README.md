@@ -23,37 +23,35 @@ There are basically these options when it comes to build system integration:
 ## 1. CMake Way
 Recommended option.
 
-There are essentially these ways options of how to use this package that depends on your preferences our build architecture:
+There are essentially these ways of how to use this package depending on your preferences our build architecture:
 
 ### A) Generate directly
 
-Call `add_subdirectory(...)` directly in your CMakeLists;
+Call `add_subdirectory(...)` directly in your CMakeLists.txt:
 
 ```cmake
 add_executable("my-project" main.cpp)
 
-# Example add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils EXCLUDE_FROM_ALL)
 add_subdirectory(<path-to-test-utils>)
+# Example: add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils)
 
-if (TARGET test-utils)
-    add_library(burda::test-utils ALIAS test-utils)
+add_library(burda::test-utils ALIAS test-utils)
 
-    # This will import header search paths, compile definitions and other dependencies of the test-utils as well
-    target_link_libraries("my-project" test-utils)
-endif()
+# This will import header search paths, compile definitions and other dependencies of the test-utils as well
+target_link_libraries("my-project" test-utils)
 ```
 
 ### B) Generate separately
 
 Generation phase on the test-utils is run separately, that means that you run:
 ```cmake
-# Example: cmake -Bbuild/test-utils -Htest-utils in the root of your project 
 cmake <path-to-test-utils>
+# Example: cmake -Bbuild/test-utils -Htest-utils in the root of your project 
 ```
 
 This will create automatically generated package configuration file `test-utils-config.cmake` that contains exported target and all important information.
 
-Then you can do this in your CMakeLists:
+Then you can do this in your CMakeLists.txt:
 
 ```cmake
 add_executable("my-project" main.cpp)
@@ -66,9 +64,11 @@ target_link_libraries("my-project" burda::test-utils)
 ```
 
 ## 2. Manual Way
-It's mainly the `include` directory that matters so make sure, the compiler will see it.
+Not recommended.
 
-You might have to manually set certain compiler (not only) settings though.
+Make sure that the `include` directory is in the search paths.
+
+You also have to set C++ 14 standard and potentially other settings as well.
 
 ## Examples
 For full examples, see implementation of [tests](tests/unit).
@@ -149,7 +149,7 @@ cmake -Bbuild -H.
 # You can also add coverage by appending "-DCOVERAGE:BOOL=ON"
 cmake -Bbuild/tests/unit -Htests/unit -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
 cmake --build build/tests/unit --config RelWithDebInfo
-# Or you can build target "run-all-tests-verbose" that will also run the tests with certain timeout:
+# Or you can build target "run-all-tests-verbose" that will also run the tests with timeout, etc.:
 # cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDebInfo
 ```
 
