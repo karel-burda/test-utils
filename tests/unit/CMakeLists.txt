@@ -12,11 +12,12 @@ add_executable(${PROJECT_NAME} "")
 
 target_sources(
     ${PROJECT_NAME}
-        PUBLIC
-            src/make_all_members_public_test.cpp
-            src/static_class_assertions_test.cpp
-            src/test_utils_test.cpp
-            src/time_utils_test.cpp)
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/lifetime_assertions_test.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/make_all_members_public_test.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/mutex_test.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/static_class_assertions_test.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/time_test.cpp)
 
 
 find_package(test-utils CONFIG REQUIRED)
@@ -37,8 +38,8 @@ add_test(NAME all-unit-tests
          COMMAND $<TARGET_FILE:${PROJECT_NAME}> --gtest_color=yes --gtest_shuffle)
 
 add_custom_target(run-all-tests-verbose
-                    COMMAND ${CMAKE_CTEST_COMMAND} -V -C ${CMAKE_BUILD_TYPE} --build-run-dir ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} --timeout 300
-                    DEPENDS ${PROJECT_NAME})
+                  COMMAND ${CMAKE_CTEST_COMMAND} -V -C ${CMAKE_BUILD_TYPE} --build-run-dir ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} --timeout 300
+                  DEPENDS ${PROJECT_NAME})
 
 burda_cmake_helpers_cpp_warnings_add_pedantic_level(${PROJECT_NAME} PRIVATE)
 burda_cmake_helpers_cpp_warnings_suppress(${PROJECT_NAME} "keyword-macro" PRIVATE)

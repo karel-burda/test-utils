@@ -6,10 +6,10 @@ add_library(${PROJECT_NAME} INTERFACE)
 
 target_sources(${PROJECT_NAME}
                     INTERFACE
+                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/lifetime_assertions.hpp
                         ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/make_all_members_public.hpp
                         ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/static_class_assertions.hpp
-                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/test_utils.hpp
-                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/time_utils.hpp)
+                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/time.hpp)
 
 target_include_directories(${PROJECT_NAME}
                                 INTERFACE
@@ -21,6 +21,7 @@ target_compile_features(${PROJECT_NAME}
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT _targets)
+
 export(EXPORT _targets
        NAMESPACE burda::
        FILE "${PROJECT_NAME}-config.cmake")

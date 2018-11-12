@@ -73,6 +73,28 @@ You also have to set C++ 14 standard and potentially other settings as well.
 ## Examples
 For full examples, see implementation of [tests](tests/unit).
 
+### [lifetime_assertions.hpp](include/test-utils/lifetime_assertions.cpp)
+Test implemented at: [lifetime_assertions_test.cpp](tests/unit/src/lifetime_assertions_test.cpp)
+```cpp
+#include <test_utils/lifetime_assertions.hpp>
+
+struct Foo
+{
+    Foo()
+    {
+    }
+
+    Foo(std::string, float)
+    {
+    }
+};
+
+// this uses "ASSERT_NO_THROW" macro from the gtest, creates an instance of the object and destructor
+// is called as well (when function going out-of-scope)
+burda::test_utils::assert_construction_and_destruction<Foo>();
+burda::test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
+```
+
 ### [make_all_members_public.hpp](include/test-utils/make_all_members_public.cpp)
 Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_members_public_test.cpp)
 ```cpp
@@ -82,6 +104,23 @@ Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_
 #include "some_class.hpp"
 
 // now we have access to protected and private members of some_class
+```
+
+### [mutex.hpp](include/test-utils/mutex.cpp)
+Test implemented at: [mutex_test.cpp](tests/unit/src/mutex_test.cpp)
+```cpp
+#include <test_utils/mutex.hpp>
+
+std::mutex lock;
+
+# Calls EXPECT_EQ gtest macros inside
+# should pass
+test_utils::check_if_mutex_is_owned(lock, false));
+
+lock.lock();
+
+# This should pass as well
+test_utils::check_if_mutex_is_owned(lock, true);
 ```
 
 ### [static_class_assertions.hpp](include/test-utils/static_class_assertions.cpp)
@@ -110,32 +149,10 @@ burda::test_utils::assert_copy_constructibility<some_struct, true>();
 burda::test_utils::assert_move_constructibility<some_struct, false>();
 ```
 
-### [test_utils.hpp](include/test-utils/test_utils.cpp)
-Test implemented at: [test_utils_test.cpp](tests/unit/src/test_utils_test.cpp)
+### [time.hpp](include/test-utils/time.cpp)
+Test implemented at: [time_test.cpp](tests/unit/src/time_test.cpp)
 ```cpp
-#include <test_utils/test_utils.hpp>
-
-struct Foo
-{
-    Foo()
-    {
-    }
-
-    Foo(std::string, float)
-    {
-    }
-};
-
-// this uses "ASSERT_NO_THROW" macro from the gtest, creates an instance of the object and destructor
-// is called as well (when function going out-of-scope)
-burda::test_utils::assert_construction_and_destruction<Foo>();
-burda::test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
-```
-
-### [time_utils.hpp](include/test-utils/time_utils.cpp)
-Test implemented at: [time_utils_test.cpp](tests/unit/src/time_utils_test.cpp)
-```cpp
-#include <test_utils/time_utils.hpp>
+#include <test_utils/time.hpp>
 
 // calls test macros "ASSERT_GE" and "ASSERT_LE" in its implementation
 burda::test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
@@ -157,11 +174,12 @@ cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDe
 For more info, see [.travis.yml](.travis.yml).
 
 # Continuous Integration
-Continuous Integration is now being run Linux (with GCC 5.x) on Travis: https://travis-ci.org/karel-burda/test-utils.
+Continuous Integration is now being run Linux (with GCC 6.x) and OS X on Travis: https://travis-ci.org/karel-burda/test-utils.
 
-Compilers are set-up to treat warnings as errors and with pedantic warning level. Targets are built in a release mode with debug symbols and code coverage measure).
+Compilers are set-up to treat warnings as errors and with pedantic warning level.
+Targets are built debug symbols with code coverage measure and release with debug symbols).
 
-The project is using just one stage (because of the overhead of spawning other stages)
+The project is using thse stages:
 * `test-utils, tests -- linux, debug, gcc, cppcheck, coverage`
 * `test-utils, tests -- osx, release with debug info, clang`
 
