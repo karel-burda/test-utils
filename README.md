@@ -72,7 +72,7 @@ You also have to set C++ 14 standard and potentially other settings as well.
 ## Examples
 For full examples, see implementation of [tests](tests/unit).
 
-### [lifetime_assertions.hpp](include/test-utils/lifetime_assertions.cpp)
+### [lifetime_assertions.hpp](include/test_utils/lifetime_assertions.hpp)
 Test implemented at: [lifetime_assertions_test.cpp](tests/unit/src/lifetime_assertions_test.cpp)
 ```cpp
 #include <test_utils/lifetime_assertions.hpp>
@@ -94,7 +94,7 @@ burda::test_utils::assert_construction_and_destruction<Foo>();
 burda::test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
 ```
 
-### [make_all_members_public.hpp](include/test-utils/make_all_members_public.cpp)
+### [make_all_members_public.hpp](include/test_utils/make_all_members_public.hpp)
 Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_members_public_test.cpp)
 ```cpp
 // after this, every member from class/struct that goes after this will have public visibility
@@ -105,15 +105,14 @@ Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_
 // now we have access to protected and private members of some_class
 ```
 
-### [mutex.hpp](include/test-utils/mutex.cpp)
+### [mutex.hpp](include/test_utils/mutex.hpp)
 Test implemented at: [mutex_test.cpp](tests/unit/src/mutex_test.cpp)
 ```cpp
 #include <test_utils/mutex.hpp>
 
 std::mutex lock;
 
-# Calls EXPECT_EQ gtest macros inside
-# should pass
+# Calls EXPECT_EQ gtest macros inside, should pass
 test_utils::check_if_mutex_is_owned(lock, false));
 
 lock.lock();
@@ -122,7 +121,7 @@ lock.lock();
 test_utils::check_if_mutex_is_owned(lock, true);
 ```
 
-### [static_class_assertions.hpp](include/test-utils/static_class_assertions.cpp)
+### [static_class_assertions.hpp](include/test_utils/static_class_assertions.hpp)
 Test implemented at: [static_class_assertions_test.cpp](tests/unit/src/static_class_assertions_test.cpp)
 ```cpp
 #include <test_utils/static_class_assertions.hpp>
@@ -148,7 +147,7 @@ burda::test_utils::assert_copy_constructibility<some_struct, true>();
 burda::test_utils::assert_move_constructibility<some_struct, false>();
 ```
 
-### [time.hpp](include/test-utils/time.cpp)
+### [time.hpp](include/test_utils/time.hpp)
 Test implemented at: [time_test.cpp](tests/unit/src/time_test.cpp)
 ```cpp
 #include <test_utils/time.hpp>
