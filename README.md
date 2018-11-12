@@ -147,7 +147,7 @@ burda::test_utils::assert_copy_constructibility<some_struct, true>();
 burda::test_utils::assert_move_constructibility<some_struct, false>();
 ```
 
-### [time.hpp](include/test-utils/time.hpp)
+### [time.hpp](include/test_utils/time.hpp)
 Test implemented at: [time_test.cpp](tests/unit/src/time_test.cpp)
 ```cpp
 #include <test_utils/time.hpp>
