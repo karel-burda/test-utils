@@ -37,7 +37,7 @@ add_subdirectory(<path-to-test-utils>)
 
 add_library(burda::test-utils ALIAS test-utils)
 
-# This will import header search paths, compile definitions and other dependencies of the test-utils as well
+# This will import search paths, compile definitions and other dependencies of the test-utils as well
 target_link_libraries("my-project" test-utils)
 ```
 
@@ -59,7 +59,7 @@ add_executable("my-project" main.cpp)
 find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
 # Alternatively assuming that the "test-utils_DIR" variable is set: find_package(test-utils CONFIG)
 
-# This will import header search paths, compile definitions and other dependencies of the test-utils as well
+# This will import search paths, compile definitions and other dependencies of the test-utils as well
 target_link_libraries("my-project" burda::test-utils)
 ```
 
@@ -76,7 +76,7 @@ For full examples, see implementation of [tests](tests/unit).
 ### [make_all_members_public.hpp](include/test-utils/make_all_members_public.cpp)
 Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_members_public_test.cpp)
 ```cpp
-// after following include, every member from class or struct that goes after this will have public visibility
+// after this include, every member from class or struct that goes after this will have public visibility
 #include <test_utils/make_all_members_public.hpp>
 
 #include "some_class.hpp"
@@ -149,8 +149,9 @@ cmake -Bbuild -H.
 # You can also add coverage by appending "-DCOVERAGE:BOOL=ON"
 cmake -Bbuild/tests/unit -Htests/unit -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
 cmake --build build/tests/unit --config RelWithDebInfo
-# Or you can build target "run-all-tests-verbose" that will also run the tests with timeout, etc.:
-# cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDebInfo
+# This runs target "run-all-tests-verbose" that will also run the tests with timeout, etc.:
+cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDebInfo
+# Or you can execute tests manually
 ```
 
 For more info, see [.travis.yml](.travis.yml).
