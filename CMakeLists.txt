@@ -1,32 +1,27 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
-project(test-utils VERSION 0.9.2 LANGUAGES CXX)
+project(test-utils VERSION 1.0.0 LANGUAGES CXX)
 
-include("cmake-helpers/cmake-helpers/messages.cmake")
-include("cmake-helpers/cmake-helpers/standard-settings.cmake")
+add_library(${PROJECT_NAME} INTERFACE)
 
-option(UNIT-TESTS "Build with unit tests" OFF)
+target_sources(${PROJECT_NAME}
+                    INTERFACE
+                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/lifetime_assertions.hpp
+                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/make_all_members_public.hpp
+                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/static_class_assertions.hpp
+                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/time.hpp)
 
-_print_project_version()
+target_include_directories(${PROJECT_NAME}
+                                INTERFACE
+                                    ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-_set_standards("11" "14")
-_set_default_build_type("Debug")
+target_compile_features(${PROJECT_NAME}
+                            INTERFACE
+                                cxx_std_14)
 
-set(HEADERS
-    include/test_utils/make_all_members_public.hpp
-    include/test_utils/static_class_assertions.hpp
-    include/test_utils/test_utils.hpp
-    include/test_utils/time_utils.hpp)
+install(TARGETS ${PROJECT_NAME}
+        EXPORT _targets)
 
-set(OTHER
-    README.md
-    .travis.yml
-    ${PROJECT_NAME}-config.cmake.in)
-
-add_custom_target(${PROJECT_NAME} SOURCES ${HEADERS} ${OTHER})
-
-configure_file(${PROJECT_NAME}-config.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake" @ONLY)
-
-if (UNIT-TESTS AND NOT USED-AS-SUBMODULE)
-    add_subdirectory(tests/unit)
-endif()
+export(EXPORT _targets
+       NAMESPACE burda::
+       FILE "${PROJECT_NAME}-config.cmake")
