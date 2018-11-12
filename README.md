@@ -13,7 +13,7 @@ with `--recurse-submodules` or `--recursive` on older versions of git. Alternati
 # Introduction
 `test-utils` features small test-related functions and macros (based on the gtest) I'm using across my project.
 
-Implementation is header-only.
+Implementation is header-only and writeen in C++ 14.
 
 See [include/test_utils](include/test_utils) for main functionality and [tests/unit](tests/unit) for unit tests.
 

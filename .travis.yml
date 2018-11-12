@@ -1,15 +1,17 @@
 stages:
-  - tests (C++14) -- cppcheck, build (linux, gcc5), tests
+  - test-utils, tests -- linux, debug, gcc, cppcheck, coverage
+  - test-utils, tests -- osx, release with debug info, clang
 
 git:
   depth: 1
 
 jobs:
   include:
-     - stage:  tests (C++14) -- cppcheck, build (linux, gcc5), tests
+     - stage: test-utils, tests -- linux, debug, gcc, cppcheck, coverage
        sudo: required
        dist: trusty
        language: cpp
+       env: BUILD_TYPE="Debug"
        compiler: g++
        os: linux
        addons:
@@ -28,12 +30,16 @@ jobs:
          - cppcheck --enable=all -I include --language=c++ --platform=unix64 --std=c++11 --check-config --suppress=missingIncludeSystem
                     -v ./tests
 
-         - cmake -Bbuild -H. -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
-         - cmake -Bbuild/tests/unit -Htests/unit -Dtest-utils_DIR:PATH=$(pwd)/build -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
+         - cmake -Bbuild -H. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE
+         - cmake -Bbuild/tests/unit -Htests/unit -Dtest-utils_DIR:PATH=$(pwd)/build -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE
                  -DCOVERAGE:BOOL=ON
-         - cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDebInfo
+         - cmake --build build/tests/unit --target run-all-tests-verbose --config $BUILD_TYPE
 
-         - coveralls -e ./build/tests/unit/gtest-src -e ./build/CMakeFiles -e ./build/tests/unit/CMakeFiles -e ./tests/unit -e cmake-helpers
-                     --gcov-options '\-lp' --verbose
+         - bash <(curl -s https://codecov.io/bash)
+         - coveralls --gcov-options '\-lp'
+                     -e build/tests/integration/gtest-src
+                     -e $(find build/tests/integration/CMakeFiles -name "CMakeCXXCompilerId.c*")
+                     -e $(find build/tests/integration/CMakeFiles -name "CheckFunctionExists.c*")
+                     -e $(find build/tests/integration/CMakeFiles -name "feature_tests.c*")
 
          - set +e
