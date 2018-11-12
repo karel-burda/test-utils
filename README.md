@@ -1,13 +1,12 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=develop)](https://travis-ci.org/karel-burda/test-utils)
-[![Coverage Status](https://coveralls.io/repos/github/karel-burda/test-utils/badge.svg?branch=develop)](https://coveralls.io/github/karel-burda/test-utils?branch=develop)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cca3592124294efa96b07fa9e32d973d)](https://www.codacy.com/app/karel-burda/test-utils?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=karel-burda/test-utils&amp;utm_campaign=Badge_Grade)
+[![Codecov Status](https://codecov.io/gh/karel-burda/test-utils/branch/develop/graph/badge.svg)](https://codecov.io/gh/karel-burda/test-utils/branch/develop)
 
 # Important
 This project contains git sub-modules that are needed for building example and tests.
 
-If you just want to use the implementation, you can clone **without** sub-modules. In case you want to build example, tests, or use CMake, please, be sure to clone the repository
+If you just want to use the implementation, you can clone **without** sub-modules. In case you want to build example or tests, be sure to clone the repository
 with `--recurse-submodules` or `--recursive` on older versions of git. Alternatively, you can clone without sub-modules and initialize these later.
 
 # Introduction
@@ -183,4 +182,4 @@ The project is using thse stages:
 * `test-utils, tests -- linux, debug, gcc, cppcheck, coverage`
 * `test-utils, tests -- osx, release with debug info, clang`
 
-Project uses [coveralls.io](https://coveralls.io/github/karel-burda/test-utils) for code coverage summary and [codacy](https://app.codacy.com/app/karel-burda/test-utils/dashboard) for the coding style and additional static analysis.
+Project uses [codecov.io](https://codecov.io/gh/karel-burda/test-utils) for code coverage summary.
