@@ -40,8 +40,8 @@ jobs:
                      -e build/tests/unit/gtest-src
                      -e cmake-helpers
                      -e tests
-                     -e $(find build -name "CMakeCXXCompilerId.c*")
-                     -e $(find build -name "CheckFunctionExists.c*")
-                     -e $(find build -name "feature_tests.c*")
+                     -e $(find build -name "CMakeCXXCompilerId.c*" | tr '\n' ' ')
+                     -e $(find build -name "CheckFunctionExists.c*" | | tr '\n' ' ')
+                     -e $(find build -name "feature_tests.c*" | | tr '\n' ' ')
 
          - set +e
