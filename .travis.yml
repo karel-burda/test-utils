@@ -36,12 +36,16 @@ jobs:
          - cmake --build build/tests/unit --target run-all-tests-verbose --config $BUILD_TYPE
 
          - bash <(curl -s https://codecov.io/bash)
+
+         - find build -name "CMakeCXXCompilerId.c*" > code_coverage_excludes
+         - find build -name "CheckFunctionExists.c*" >> code_coverage_excludes
+         - find build -name "feature_tests.c*" >> code_coverage_excludes
+         - readonly EXCLUDE_EXPRESSION=$(cat code_coverage_excludes | while read -r a; do echo "-e $a"; done | tr '\n' ' ')
+         - echo $EXCLUDE_EXPRESSION
          - coveralls --gcov-options '\-lp'
                      -e build/tests/unit/gtest-src
                      -e cmake-helpers
                      -e tests
-                     -e $(find build -name "CMakeCXXCompilerId.c*" | tr '\n' ' ')
-                     -e $(find build -name "CheckFunctionExists.c*" | tr '\n' ' ')
-                     -e $(find build -name "feature_tests.c*" | tr '\n' ' ')
+                     $EXCLUDE_EXPRESSION
 
          - set +e
