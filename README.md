@@ -76,7 +76,7 @@ For full examples, see implementation of [tests](tests/unit).
 ### [make_all_members_public.hpp](include/test-utils/make_all_members_public.cpp)
 Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_members_public_test.cpp)
 ```cpp
-// after this include, every member from class or struct that goes after this will have public visibility
+// after this, every member from class/struct that goes after this will have public visibility
 #include <test_utils/make_all_members_public.hpp>
 
 #include "some_class.hpp"
@@ -162,6 +162,7 @@ Continuous Integration is now being run Linux (with GCC 5.x) on Travis: https://
 Compilers are set-up to treat warnings as errors and with pedantic warning level. Targets are built in a release mode with debug symbols and code coverage measure).
 
 The project is using just one stage (because of the overhead of spawning other stages)
-* `tests (C++14)` -- cppcheck, build (linux, gcc5), tests
+* `test-utils, tests -- linux, debug, gcc, cppcheck, coverage`
+* `test-utils, tests -- osx, release with debug info, clang`
 
 Project uses [coveralls.io](https://coveralls.io/github/karel-burda/test-utils) for code coverage summary and [codacy](https://app.codacy.com/app/karel-burda/test-utils/dashboard) for the coding style and additional static analysis.
