@@ -19,11 +19,11 @@ jobs:
            sources:
              - ubuntu-toolchain-r-test
            packages:
-             - g++-5
+             - g++-6
              - cppcheck
        before_install:
          - pip install --user cpp-coveralls
-       install: export CXX="g++-5"
+       install: export CXX="g++-6"
        script:
          - set -e
 
