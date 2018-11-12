@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <test_utils/time_utils.hpp>
+#include <test_utils/time.hpp>
 
 namespace
 {
