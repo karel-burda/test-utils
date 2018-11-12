@@ -38,6 +38,8 @@ jobs:
          - bash <(curl -s https://codecov.io/bash)
          - coveralls --gcov-options '\-lp'
                      -e build/tests/unit/gtest-src
+                     -e cmake-helpers
+                     -e tests
                      -e $(find build/tests/unit/CMakeFiles -name "CMakeCXXCompilerId.c*")
                      -e $(find build/tests/unit/CMakeFiles -name "CheckFunctionExists.c*")
                      -e $(find build/tests/unit/CMakeFiles -name "feature_tests.c*")
