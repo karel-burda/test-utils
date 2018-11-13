@@ -4,15 +4,15 @@
 [![Codecov Status](https://codecov.io/gh/karel-burda/test-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/karel-burda/test-utils/branch/master)
 
 # Important
-This project contains git sub-modules that are needed for building example and tests.
+This project contains git sub-modules that are needed for building tests.
 
-If you just want to use the implementation, you can clone **without** sub-modules. In case you want to build example or tests, be sure to clone the repository
+If you just want to use the implementation, you can clone without sub-modules. In case you want to build the tests, be sure to clone the repository
 with `--recurse-submodules` or `--recursive` on older versions of git. Alternatively, you can clone without sub-modules and initialize these later.
 
 # Introduction
 `test-utils` features small test-related functions and macros (based on the gtest) I'm using across my project.
 
-Implementation is header-only and writeen in C++ 14.
+Implementation is header-only and written in C++ 14.
 
 See [include/test_utils](include/test_utils) for main functionality and [tests/unit](tests/unit) for unit tests.
 
@@ -94,15 +94,17 @@ burda::test_utils::assert_construction_and_destruction<Foo>();
 burda::test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
 ```
 
-### [make_all_members_public.hpp](include/test_utils/make_all_members_public.hpp)
-Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_members_public_test.cpp)
+### [macros.hpp](include/test_utils/macros.hpp)
+Test implemented at: [macros_test.cpp](tests/unit/src/macros_test.cpp)
 ```cpp
-// after this, every member from class/struct that goes after this will have public visibility
-#include <test_utils/make_all_members_public.hpp>
+#include <test_utils/macros.hpp>
 
-#include "some_class.hpp"
+# Can use EXPECT or ASSERT version of macro
+BURDA_TEST_UTILS_EXPECT_XOR(true, false);
+BURDA_TEST_UTILS_EXPECT_XOR(1, 0);
+BURDA_TEST_UTILS_EXPECT_XOR(-99, 7);
 
-// now we have access to protected and private members of some_class
+BURDA_TEST_UTILS_ASSERT_XOR(false, true);
 ```
 
 ### [mutex.hpp](include/test_utils/mutex.hpp)
@@ -157,12 +159,14 @@ burda::test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
 ```
 
 # Unit Tests
-For building tests, run cmake in the source directory [tests/unit](tests/unit):
+Tests require sub-module [cmake-helpers](https://github.com/karel-burda/cmake-helpers).
+
+For building tests, run CMake in the source directory [tests/unit](tests/unit):
 
 ```cmake
 cmake -Bbuild -H.
 # You can also add coverage by appending "-DCOVERAGE:BOOL=ON"
-cmake -Bbuild/tests/unit -Htests/unit -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
+cmake -Bbuild/tests/unit -Htests/unit -Dtest-utils_DIR:PATH=$(pwd)/build -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
 cmake --build build/tests/unit --config RelWithDebInfo
 # This runs target "run-all-tests-verbose" that will also run the tests with timeout, etc.:
 cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDebInfo
