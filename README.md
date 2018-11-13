@@ -94,15 +94,17 @@ burda::test_utils::assert_construction_and_destruction<Foo>();
 burda::test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
 ```
 
-### [make_all_members_public.hpp](include/test_utils/make_all_members_public.hpp)
-Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_members_public_test.cpp)
+### [macros.hpp](include/test_utils/macros.hpp)
+Test implemented at: [macros_test.cpp](tests/unit/src/macros_test.cpp)
 ```cpp
-// after this, every member from class/struct that goes after this will have public visibility
-#include <test_utils/make_all_members_public.hpp>
+#include <test_utils/macros.hpp>
 
-#include "some_class.hpp"
+# Can use EXPECT or ASSERT version of macro
+BURDA_TEST_UTILS_EXPECT_XOR(true, false);
+BURDA_TEST_UTILS_EXPECT_XOR(1, 0);
+BURDA_TEST_UTILS_EXPECT_XOR(-99, 7);
 
-// now we have access to protected and private members of some_class
+BURDA_TEST_UTILS_ASSERT_XOR(false, true);
 ```
 
 ### [mutex.hpp](include/test_utils/mutex.hpp)
