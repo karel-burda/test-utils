@@ -15,6 +15,7 @@ target_sources(
         PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/src/lifetime_assertions_test.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/src/make_all_members_public_test.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/macros_test.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/src/mutex_test.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/src/static_class_assertions_test.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/src/time_test.cpp)

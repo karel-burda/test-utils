@@ -9,7 +9,8 @@ target_sources(${PROJECT_NAME}
                         ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/lifetime_assertions.hpp
                         ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/make_all_members_public.hpp
                         ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/static_class_assertions.hpp
-                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/time.hpp)
+                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/time.hpp
+                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/macros.hpp)
 
 target_include_directories(${PROJECT_NAME}
                                 INTERFACE
