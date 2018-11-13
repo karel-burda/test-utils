@@ -1,8 +1,6 @@
 #pragma once
 
 #include <chrono>
-#include <functional>
-#include <stdexcept>
 
 #include <gtest/gtest.h>
 

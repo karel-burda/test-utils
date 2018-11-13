@@ -1,5 +1,3 @@
-#include <thread>
-
 #include <gtest/gtest.h>
 
 #include <test_utils/time.hpp>

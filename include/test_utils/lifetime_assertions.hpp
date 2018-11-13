@@ -1,7 +1,5 @@
 #pragma once
 
-#include <mutex>
-
 #include <gtest/gtest.h>
 
 #define EXPECT_XOR(condition1, condition2) EXPECT_NE(!condition1, !condition2);
