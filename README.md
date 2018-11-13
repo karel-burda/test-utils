@@ -159,7 +159,9 @@ burda::test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
 ```
 
 # Unit Tests
-For building tests, run cmake in the source directory [tests/unit](tests/unit):
+Tests require sub-module [cmake-helpers](https://github.com/karel-burda/cmake-helpers).
+
+For building tests, run CMake in the source directory [tests/unit](tests/unit):
 
 ```cmake
 cmake -Bbuild -H.
