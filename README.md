@@ -34,6 +34,9 @@ add_executable("my-project" main.cpp)
 add_subdirectory(<path-to-test-utils>)
 # Example: add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils)
 
+# Query of package version
+message(STATUS "Current version of test-utils is: ${test-utils_VERSION}")
+
 add_library(burda::test-utils ALIAS test-utils)
 
 # This will import search paths, compile definitions and other dependencies of the test-utils as well
@@ -58,6 +61,9 @@ add_executable("my-project" main.cpp)
 find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
 # Alternatively assuming that the "test-utils_DIR" variable is set: find_package(test-utils CONFIG)
 
+# You can also query (or force specific version during the previous "find_package()" call)
+message(STATUS "Found version of test-utils is: ${test-utils_VERSION}")
+
 # This will import search paths, compile definitions and other dependencies of the test-utils as well
 target_link_libraries("my-project" burda::test-utils)
 ```
@@ -67,7 +73,7 @@ Not recommended.
 
 Make sure that the `include` directory is in the search paths.
 
-You also have to set C++ 14 standard and potentially other settings as well.
+You also have to set C++14 standard and potentially other settings as well.
 
 ## Examples
 For full examples, see implementation of [tests](tests/unit).
