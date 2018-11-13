@@ -17,7 +17,7 @@ void assert_construction_and_destruction(args... a)
 
     class_type instance{ std::forward<args>(a)... };
 
-    // explicit unused variable compiler supression
+    // explicit unused variable compiler suppression
     (void)instance;
 }
 }

@@ -4,15 +4,15 @@
 [![Codecov Status](https://codecov.io/gh/karel-burda/test-utils/branch/develop/graph/badge.svg)](https://codecov.io/gh/karel-burda/test-utils/branch/develop)
 
 # Important
-This project contains git sub-modules that are needed for building example and tests.
+This project contains git sub-modules that are needed for building tests.
 
-If you just want to use the implementation, you can clone **without** sub-modules. In case you want to build example or tests, be sure to clone the repository
+If you just want to use the implementation, you can clone without sub-modules. In case you want to build the tests, be sure to clone the repository
 with `--recurse-submodules` or `--recursive` on older versions of git. Alternatively, you can clone without sub-modules and initialize these later.
 
 # Introduction
 `test-utils` features small test-related functions and macros (based on the gtest) I'm using across my project.
 
-Implementation is header-only and writeen in C++ 14.
+Implementation is header-only and written in C++ 14.
 
 See [include/test_utils](include/test_utils) for main functionality and [tests/unit](tests/unit) for unit tests.
 
