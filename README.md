@@ -162,7 +162,7 @@ For building tests, run cmake in the source directory [tests/unit](tests/unit):
 ```cmake
 cmake -Bbuild -H.
 # You can also add coverage by appending "-DCOVERAGE:BOOL=ON"
-cmake -Bbuild/tests/unit -Htests/unit -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
+cmake -Bbuild/tests/unit -Htests/unit -Dtest-utils_DIR:PATH=$(pwd)/build -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
 cmake --build build/tests/unit --config RelWithDebInfo
 # This runs target "run-all-tests-verbose" that will also run the tests with timeout, etc.:
 cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDebInfo
