@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![Version](https://img.shields.io/badge/version-1.0.1-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=develop)](https://travis-ci.org/karel-burda/test-utils)
 [![Codecov Status](https://codecov.io/gh/karel-burda/test-utils/branch/develop/graph/badge.svg)](https://codecov.io/gh/karel-burda/test-utils/branch/develop)
@@ -12,7 +12,7 @@ with `--recurse-submodules` or `--recursive` on older versions of git. Alternati
 # Introduction
 `test-utils` features small test-related functions and macros (based on the gtest) I'm using across my project.
 
-Implementation is header-only and written in C++ 14.
+Implementation is header-only and written in C++ 14 and tested on Windows, Linux and OS X.
 
 See [include/test_utils](include/test_utils) for main functionality and [tests/unit](tests/unit) for unit tests.
 
