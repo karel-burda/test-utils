@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
-project(test-utils VERSION 1.0.0 LANGUAGES CXX)
+project(test-utils VERSION 1.0.1 LANGUAGES CXX)
 
 add_library(${PROJECT_NAME} INTERFACE)
 
@@ -26,3 +26,7 @@ install(TARGETS ${PROJECT_NAME}
 export(EXPORT _targets
        NAMESPACE burda::
        FILE "${PROJECT_NAME}-config.cmake")
+
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
+                                 COMPATIBILITY ExactVersion)

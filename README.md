@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![Version](https://img.shields.io/badge/version-1.0.1-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=master)](https://travis-ci.org/karel-burda/test-utils)
 [![Codecov Status](https://codecov.io/gh/karel-burda/test-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/karel-burda/test-utils/branch/master)
@@ -12,7 +12,7 @@ with `--recurse-submodules` or `--recursive` on older versions of git. Alternati
 # Introduction
 `test-utils` features small test-related functions and macros (based on the gtest) I'm using across my project.
 
-Implementation is header-only and written in C++ 14.
+Implementation is header-only and written in C++ 14 and tested on Windows, Linux and OS X.
 
 See [include/test_utils](include/test_utils) for main functionality and [tests/unit](tests/unit) for unit tests.
 
@@ -33,6 +33,9 @@ add_executable("my-project" main.cpp)
 
 add_subdirectory(<path-to-test-utils>)
 # Example: add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils)
+
+# Query of package version
+message(STATUS "Current version of test-utils is: ${test-utils_VERSION}")
 
 add_library(burda::test-utils ALIAS test-utils)
 
@@ -58,6 +61,9 @@ add_executable("my-project" main.cpp)
 find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
 # Alternatively assuming that the "test-utils_DIR" variable is set: find_package(test-utils CONFIG)
 
+# You can also query (or force specific version during the previous "find_package()" call)
+message(STATUS "Found version of test-utils is: ${test-utils_VERSION}")
+
 # This will import search paths, compile definitions and other dependencies of the test-utils as well
 target_link_libraries("my-project" burda::test-utils)
 ```
@@ -67,7 +73,7 @@ Not recommended.
 
 Make sure that the `include` directory is in the search paths.
 
-You also have to set C++ 14 standard and potentially other settings as well.
+You also have to set C++14 standard and potentially other settings as well.
 
 ## Examples
 For full examples, see implementation of [tests](tests/unit).

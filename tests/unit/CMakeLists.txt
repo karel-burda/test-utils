@@ -22,6 +22,8 @@ target_sources(
 
 
 find_package(test-utils CONFIG REQUIRED)
+message(STATUS "Found version of test-utils is: ${test-utils_VERSION}")
+
 target_link_libraries(${PROJECT_NAME} burda::test-utils)
 
 burda_cmake_helpers_cpp_gtest_bootstrap_and_link(${PROJECT_NAME} "release-1.8.1" "Release")
