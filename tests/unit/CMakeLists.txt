@@ -10,15 +10,14 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/cmake-helpers/cmake-helpers
 
 add_executable(${PROJECT_NAME} "")
 
-target_sources(
-    ${PROJECT_NAME}
-        PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/lifetime_assertions_test.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/make_all_members_public_test.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/macros_test.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/mutex_test.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/static_class_assertions_test.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/time_test.cpp)
+target_sources(${PROJECT_NAME}
+                   PRIVATE
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/lifetime_assertions_test.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/make_all_members_public_test.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/macros_test.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/mutex_test.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/static_class_assertions_test.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/time_test.cpp)
 
 
 find_package(test-utils CONFIG REQUIRED)
