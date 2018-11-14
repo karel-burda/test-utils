@@ -39,7 +39,7 @@ jobs:
 
          - set +e
 
-     - stage: tests -- osx, release with debug info, clang
+     - stage: test-utils, tests -- osx, release with debug info, clang
        os: osx
        language: cpp
        env: BUILD_TYPE="RelWithDebInfo"
