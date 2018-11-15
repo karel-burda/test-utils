@@ -10,27 +10,24 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/cmake-helpers/cmake-helpers
 
 add_executable(${PROJECT_NAME} "")
 
-target_sources(
-    ${PROJECT_NAME}
-        PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/lifetime_assertions_test.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/make_all_members_public_test.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/macros_test.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/mutex_test.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/static_class_assertions_test.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/time_test.cpp)
+target_sources(${PROJECT_NAME}
+                   PRIVATE
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/lifetime_assertions_test.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/make_all_members_public_test.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/macros_test.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/mutex_test.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/static_class_assertions_test.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/time_test.cpp)
 
 
 find_package(test-utils CONFIG REQUIRED)
 message(STATUS "Found version of test-utils is: ${test-utils_VERSION}")
+target_link_libraries(${PROJECT_NAME} PRIVATE burda::test-utils)
 
-target_link_libraries(${PROJECT_NAME} burda::test-utils)
-
-burda_cmake_helpers_cpp_gtest_bootstrap_and_link(${PROJECT_NAME} "release-1.8.1" "Release")
+burda_cmake_helpers_cpp_gtest_bootstrap_and_link(${PROJECT_NAME} "release-1.8.1" "Release" PRIVATE)
 
 if (COVERAGE)
     message(STATUS "Building unit tests with code coverage")
-
     burda_cmake_helpers_cpp_coverage_add_build_options(${PROJECT_NAME} PRIVATE)
 endif()
 
