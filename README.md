@@ -41,6 +41,8 @@ add_library(burda::test-utils ALIAS test-utils)
 
 # This will import search paths, compile definitions and other dependencies of the test-utils as well
 target_link_libraries("my-project" test-utils)
+# Or with private visibility: target_link_libraries("my-project" PRIVATE test-utils)
+
 ```
 
 ### B) Generate separately
@@ -66,6 +68,8 @@ message(STATUS "Found version of test-utils is: ${test-utils_VERSION}")
 
 # This will import search paths, compile definitions and other dependencies of the test-utils as well
 target_link_libraries("my-project" burda::test-utils)
+# Or with public visibility: target_link_libraries("my-project" PUBLIC burda::test-utils)
+
 ```
 
 ## 2. Manual Way
