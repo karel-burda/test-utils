@@ -28,7 +28,6 @@ burda_cmake_helpers_cpp_gtest_bootstrap_and_link(${PROJECT_NAME} "release-1.8.1"
 
 if (COVERAGE)
     message(STATUS "Building unit tests with code coverage")
-
     burda_cmake_helpers_cpp_coverage_add_build_options(${PROJECT_NAME} PRIVATE)
 endif()
 
