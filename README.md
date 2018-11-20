@@ -32,16 +32,16 @@ Call `add_subdirectory(...)` directly in your CMakeLists.txt:
 add_executable("my-project" main.cpp)
 
 add_subdirectory(<path-to-test-utils>)
-# Example: add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils)
+# example: add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils)
 
-# Query of package version
+# query of package version
 message(STATUS "Current version of test-utils is: ${test-utils_VERSION}")
 
 add_library(burda::test-utils ALIAS test-utils)
 
-# This will import search paths, compile definitions and other dependencies of the test-utils as well
+# this will import search paths, compile definitions and other dependencies of the test-utils as well
 target_link_libraries("my-project" test-utils)
-# Or with private visibility: target_link_libraries("my-project" PRIVATE test-utils)
+# or with private visibility: target_link_libraries("my-project" PRIVATE test-utils)
 
 ```
 
@@ -50,7 +50,7 @@ target_link_libraries("my-project" test-utils)
 Generation phase on the test-utils is run separately, that means that you run:
 ```cmake
 cmake <path-to-test-utils>
-# Example: cmake -Bbuild/test-utils -Htest-utils in the root of your project 
+# example: cmake -Bbuild/test-utils -Htest-utils in the root of your project 
 ```
 
 This will create automatically generated package configuration file `test-utils-config.cmake` that contains exported target and all important information.
@@ -61,14 +61,14 @@ Then you can do this in your CMakeLists.txt:
 add_executable("my-project" main.cpp)
 
 find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
-# Alternatively assuming that the "test-utils_DIR" variable is set: find_package(test-utils CONFIG)
+# alternatively assuming that the "test-utils_DIR" variable is set: find_package(test-utils CONFIG)
 
-# You can also query (or force specific version during the previous "find_package()" call)
+# you can also query (or force specific version during the previous "find_package()" call)
 message(STATUS "Found version of test-utils is: ${test-utils_VERSION}")
 
-# This will import search paths, compile definitions and other dependencies of the test-utils as well
+# this will import search paths, compile definitions and other dependencies of the test-utils as well
 target_link_libraries("my-project" burda::test-utils)
-# Or with public visibility: target_link_libraries("my-project" PUBLIC burda::test-utils)
+# or with public visibility: target_link_libraries("my-project" PUBLIC burda::test-utils)
 
 ```
 
@@ -124,12 +124,12 @@ Test implemented at: [mutex_test.cpp](tests/unit/src/mutex_test.cpp)
 
 std::mutex lock;
 
-// Calls EXPECT_EQ gtest macros inside, should pass
+// calls EXPECT_EQ gtest macros inside, should pass
 test_utils::check_if_mutex_is_owned(lock, false));
 
 lock.lock();
 
-// This should pass as well
+// this should pass as well
 test_utils::check_if_mutex_is_owned(lock, true);
 ```
 
@@ -175,12 +175,14 @@ For building tests, run CMake in the source directory [tests/unit](tests/unit):
 
 ```cmake
 cmake -Bbuild -H.
-# You can also add coverage by appending "-DCOVERAGE:BOOL=ON"
+
+# you can also add coverage by appending "-DCOVERAGE:BOOL=ON"
 cmake -Bbuild/tests/unit -Htests/unit -Dtest-utils_DIR:PATH=$(pwd)/build -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
 cmake --build build/tests/unit --config RelWithDebInfo
-# This runs target "run-all-tests-verbose" that will also run the tests with timeout, etc.:
+
+# this runs target "run-all-tests-verbose" that will also run the tests with timeout, etc.:
 cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDebInfo
-# Or you can execute tests manually
+# or you can execute tests manually
 ```
 
 For more info, see [.travis.yml](.travis.yml).
