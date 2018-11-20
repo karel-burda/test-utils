@@ -109,7 +109,7 @@ Test implemented at: [macros_test.cpp](tests/unit/src/macros_test.cpp)
 ```cpp
 #include <test_utils/macros.hpp>
 
-# Can use EXPECT or ASSERT version of macro
+// Can use EXPECT or ASSERT version of macro
 BURDA_TEST_UTILS_EXPECT_XOR(true, false);
 BURDA_TEST_UTILS_EXPECT_XOR(1, 0);
 BURDA_TEST_UTILS_EXPECT_XOR(-99, 7);
@@ -124,12 +124,12 @@ Test implemented at: [mutex_test.cpp](tests/unit/src/mutex_test.cpp)
 
 std::mutex lock;
 
-# Calls EXPECT_EQ gtest macros inside, should pass
+// Calls EXPECT_EQ gtest macros inside, should pass
 test_utils::check_if_mutex_is_owned(lock, false));
 
 lock.lock();
 
-# This should pass as well
+// This should pass as well
 test_utils::check_if_mutex_is_owned(lock, true);
 ```
 
