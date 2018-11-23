@@ -117,6 +117,25 @@ BURDA_TEST_UTILS_EXPECT_XOR(-99, 7);
 BURDA_TEST_UTILS_ASSERT_XOR(false, true);
 ```
 
+### [make_all_members_public.hpp](include/test_utils/make_all_members_public.hpp)
+Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_members_public_test.cpp)
+```cpp
+#include <test_utils/make_all_members_public.hpp>
+
+// from now, everything marked either "private" or "protected" becomes "public",
+// as marked in the header itself, use at own risk, this is UB in C++
+
+class foo
+{
+private:
+    bool bar = false;
+}
+
+// this is compile-able now:
+foo f;
+f.bar = true;
+```
+
 ### [mutex.hpp](include/test_utils/mutex.hpp)
 Test implemented at: [mutex_test.cpp](tests/unit/src/mutex_test.cpp)
 ```cpp
