@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-1.0.4-green.svg)
+![Version](https://img.shields.io/badge/version-1.0.5-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=master)](https://travis-ci.org/karel-burda/test-utils)
 [![Codecov Status](https://codecov.io/gh/karel-burda/test-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/karel-burda/test-utils/branch/master)
@@ -115,6 +115,25 @@ BURDA_TEST_UTILS_EXPECT_XOR(1, 0);
 BURDA_TEST_UTILS_EXPECT_XOR(-99, 7);
 
 BURDA_TEST_UTILS_ASSERT_XOR(false, true);
+```
+
+### [make_all_members_public.hpp](include/test_utils/make_all_members_public.hpp)
+Test implemented at: [make_all_members_public_test.cpp](tests/unit/src/make_all_members_public_test.cpp)
+```cpp
+#include <test_utils/make_all_members_public.hpp>
+
+// from now, everything marked either "private" or "protected" becomes "public",
+// as marked in the header itself, use at own risk, this is UB in C++
+
+class foo
+{
+private:
+    bool bar = false;
+}
+
+// this is compile-able now:
+foo f;
+f.bar = true;
 ```
 
 ### [mutex.hpp](include/test_utils/mutex.hpp)
