@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-1.0.4-green.svg)
+![Version](https://img.shields.io/badge/version-1.0.5-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=develop)](https://travis-ci.org/karel-burda/test-utils)
 [![Codecov Status](https://codecov.io/gh/karel-burda/test-utils/branch/develop/graph/badge.svg)](https://codecov.io/gh/karel-burda/test-utils/branch/develop)
@@ -29,7 +29,7 @@ There are essentially these ways of how to use this package depending on your pr
 Call `add_subdirectory(...)` directly in your CMakeLists.txt:
 
 ```cmake
-add_executable("my-project" main.cpp)
+add_executable(my-project main.cpp)
 
 add_subdirectory(<path-to-test-utils>)
 # example: add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils)
@@ -40,8 +40,8 @@ message(STATUS "Current version of test-utils is: ${test-utils_VERSION}")
 add_library(burda::test-utils ALIAS test-utils)
 
 # this will import search paths, compile definitions and other dependencies of the test-utils as well
-target_link_libraries("my-project" test-utils)
-# or with private visibility: target_link_libraries("my-project" PRIVATE test-utils)
+target_link_libraries(my-project test-utils)
+# or with private visibility: target_link_libraries(my-project PRIVATE test-utils)
 
 ```
 
@@ -58,7 +58,7 @@ This will create automatically generated package configuration file `test-utils-
 Then you can do this in your CMakeLists.txt:
 
 ```cmake
-add_executable("my-project" main.cpp)
+add_executable(my-project main.cpp)
 
 find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
 # alternatively assuming that the "test-utils_DIR" variable is set: find_package(test-utils CONFIG)
@@ -67,7 +67,7 @@ find_package(test-utils CONFIG PATHS <path-to-binary-dir-of-test-utils>)
 message(STATUS "Found version of test-utils is: ${test-utils_VERSION}")
 
 # this will import search paths, compile definitions and other dependencies of the test-utils as well
-target_link_libraries("my-project" burda::test-utils)
+target_link_libraries(my-project burda::test-utils)
 # or with public visibility: target_link_libraries("my-project" PUBLIC burda::test-utils)
 
 ```
