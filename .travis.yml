@@ -34,7 +34,7 @@ jobs:
          - cmake -Bbuild -H. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE
          - cmake -Bbuild/tests/unit -Htests/unit -Dtest-utils_DIR:PATH=$(pwd)/build -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE
                  -DCOVERAGE:BOOL=ON
-         - cmake --build build/tests/unit --target run-all-tests-verbose --config $BUILD_TYPE
+         - cmake --build build/tests/unit --target run-all-tests-verbose --config $BUILD_TYPE -- -j $(nproc)
 
          - bash <(curl -s https://codecov.io/bash)
 
@@ -50,7 +50,7 @@ jobs:
 
        - cmake -Bbuild -H. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE
        - cmake -Bbuild/tests/unit -Htests/unit -Dtest-utils_DIR:PATH=$(pwd)/build -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE
-       - cmake --build build/tests/unit --target run-all-tests-verbose --config $BUILD_TYPE
+       - cmake --build build/tests/unit --target run-all-tests-verbose --config $BUILD_TYPE -- -j $(sysctl -n hw.ncpu)
 
        - set +e
 
