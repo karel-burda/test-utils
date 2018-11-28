@@ -1,14 +1,9 @@
-stages:
-  - test-utils, tests -- linux, debug, cppcheck, coverage, g++, 64-bit
-  - test-utils, tests -- osx, release with debug info, clang++, 64-bit
-  - test-utils, tests -- windows, release, msvc, 32-bit
-
 git:
   depth: 1
 
-jobs:
+matrix:
   include:
-     - stage: test-utils, tests -- linux, debug, cppcheck, coverage, g++, 64-bit
+     - name: "test-utils, tests -- linux, debug, cppcheck, coverage, g++, 64-bit"
        os: linux
        dist: xenial
        language: cpp
@@ -40,7 +35,7 @@ jobs:
 
          - set +e
 
-     - stage: test-utils, tests -- osx, release with debug info, clang++, 64-bit
+     - name: "test-utils, tests -- osx, release with debug info, clang++, 64-bit"
        os: osx
        language: cpp
        env: BUILD_TYPE="RelWithDebInfo"
@@ -54,7 +49,7 @@ jobs:
 
        - set +e
 
-     - stage: test-utils, tests -- windows, release, msvc, 32-bit
+     - name: "test-utils, tests -- windows, release, msvc, 32-bit"
        os: windows
        language: cpp
        env: BUILD_TYPE="Release"
