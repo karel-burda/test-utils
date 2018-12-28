@@ -1,30 +1,30 @@
-![Version](https://img.shields.io/badge/version-1.0.10-green.svg)
+![Version](https://img.shields.io/badge/version-1.1.1-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=master)](https://travis-ci.org/karel-burda/test-utils)
 [![Codecov Status](https://codecov.io/gh/karel-burda/test-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/karel-burda/test-utils/branch/master)
 
-# Important
+## Important
 This project contains git sub-modules that are needed for building tests.
 
 If you just want to use the implementation, you can clone without sub-modules. In case you want to build the tests, be sure to clone the repository
 with `--recurse-submodules` or `--recursive` on older versions of git. Alternatively, you can clone without sub-modules and initialize these later.
 
-# Introduction
+## Introduction
 `test-utils` features small test-related functions and macros (based on the gtest) I'm using across my project.
 
 Implementation is header-only and written in C++ 14 and tested on Windows, Linux and OS X.
 
 See [include/test_utils](include/test_utils) for main functionality and [tests/unit](tests/unit) for unit tests.
 
-# Usage
+## Usage
 There are basically these options when it comes to build system integration:
 
-## 1. CMake Way
+### 1. CMake Way
 Recommended option.
 
 There are essentially these ways of how to use this package depending on your preferences our build architecture:
 
-### A) Generate directly
+#### A) Generate directly
 
 Call `add_subdirectory(...)` directly in your CMakeLists.txt:
 
@@ -45,7 +45,7 @@ target_link_libraries(my-project test-utils)
 
 ```
 
-### B) Generate separately
+#### B) Generate separately
 
 Generation phase on the test-utils is run separately, that means that you run:
 ```cmake
@@ -72,7 +72,7 @@ target_link_libraries(my-project burda::test-utils)
 
 ```
 
-## 2. Manual Way
+### 2. Manual Way
 Not recommended.
 
 Make sure that the `include` directory is in the search paths.
@@ -187,7 +187,7 @@ Test implemented at: [time_test.cpp](tests/unit/src/time_test.cpp)
 burda::test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
 ```
 
-# Unit Tests
+## Unit Tests
 Tests require sub-module [cmake-helpers](https://github.com/karel-burda/cmake-helpers).
 
 For building tests, run CMake in the source directory [tests/unit](tests/unit):
@@ -206,15 +206,15 @@ cmake --build build/tests/unit --target run-all-tests-verbose --config RelWithDe
 
 For more info, see [.travis.yml](.travis.yml).
 
-# Continuous Integration
+## Continuous Integration
 Continuous Integration is now being run Linux, OS X and Windows on Travis: https://travis-ci.org/karel-burda/test-utils.
 
 Compilers are set-up to treat warnings as errors and with pedantic warning level.
 Targets are built in one stage with debug symbols with code coverage measure and in release mode with debug symbols in the second one.
 
 The project is using these jobs:
-* `test-utils, tests -- linux, debug, cppcheck, coverage, g++, 64-bit`
-* `test-utils, tests -- osx, release with debug info, clang++, 64-bit`
-* `test-utils, tests -- windows, release, msvc, 32-bit`
+  * `test-utils, tests -- linux, debug, cppcheck, coverage, g++, 64-bit`
+  * `test-utils, tests -- osx, release with debug info, clang++, 64-bit`
+  * `test-utils, tests -- windows, release, msvc, 32-bit`
 
 Project uses [codecov.io](https://codecov.io/gh/karel-burda/test-utils) for code coverage summary.
