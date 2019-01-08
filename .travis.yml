@@ -17,8 +17,6 @@ matrix:
            packages:
              - g++-6
              - cppcheck
-       before_install:
-         - pip install --user cpp-coveralls
        install: export CXX="g++-6"
        script:
          - set -e
