@@ -1,12 +1,12 @@
 #include <string>
 
-#include <test_utils/lifetime_assertions.hpp>
+#include <test_utils/lifetime.hpp>
 
 namespace
 {
 namespace test_utils = burda::test_utils;
 
-TEST(lifetime_assertions, assert_construction_and_destruction)
+TEST(lifetime, assert_construction_and_destruction)
 {
     EXPECT_NO_THROW(test_utils::assert_construction_and_destruction<int>());
     EXPECT_NO_THROW(test_utils::assert_construction_and_destruction<float>(999.0f));

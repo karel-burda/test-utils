@@ -1,5 +1,5 @@
-![Version](https://img.shields.io/badge/version-1.1.2-green.svg)
-[![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
+![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)
+[![License](https://img.shields.io/badge/license-MIT_License-blue.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=develop)](https://travis-ci.org/karel-burda/test-utils)
 [![Codecov Status](https://codecov.io/gh/karel-burda/test-utils/branch/develop/graph/badge.svg)](https://codecov.io/gh/karel-burda/test-utils/branch/develop)
 
@@ -34,7 +34,7 @@ add_executable(my-project main.cpp)
 add_subdirectory(<path-to-test-utils>)
 # example: add_subdirectory(test-utils ${CMAKE_BINARY_DIR}/test-utils)
 
-# query of package version
+# query package version
 message(STATUS "Current version of test-utils is: ${test-utils_VERSION}")
 
 add_library(burda::test-utils ALIAS test-utils)
@@ -82,10 +82,22 @@ You also have to set C++14 standard and potentially other settings as well.
 ## Examples
 For full examples, see implementation of [tests](tests/unit).
 
-### [lifetime_assertions.hpp](include/test_utils/lifetime_assertions.hpp)
-Test implemented at: [lifetime_assertions_test.cpp](tests/unit/src/lifetime_assertions_test.cpp)
+### [array.hpp](include/test_utils/array.hpp)
+Test implemented at: [array_test.cpp](tests/unit/src/array_test.cpp)
 ```cpp
-#include <test_utils/lifetime_assertions.hpp>
+#include <test_utils/array.hpp>
+
+int array1 = { 1, 2, 3 };
+int array2 = { 1, 2, 3 };
+
+BURDA_TEST_UTILS_EXPECT_ARRAYS_EQUAL(array1, array2, 3);
+BURDA_TEST_UTILS_ASSERT_ARRAYS_EQUAL(array1, array2, 3);
+```
+
+### [lifetime.hpp](include/test_utils/lifetime.hpp)
+Test implemented at: [lifetime_test.cpp](tests/unit/src/lifetime_test.cpp)
+```cpp
+#include <test_utils/lifetime.hpp>
 
 struct Foo
 {
@@ -100,21 +112,8 @@ struct Foo
 
 // this uses "ASSERT_NO_THROW" macro from the gtest, creates an instance of the object and destructor
 // is called as well (when function going out-of-scope)
-burda::test_utils::assert_construction_and_destruction<Foo>();
-burda::test_utils::assert_construction_and_destruction<Foo>("bar", 1.0f);
-```
-
-### [macros.hpp](include/test_utils/macros.hpp)
-Test implemented at: [macros_test.cpp](tests/unit/src/macros_test.cpp)
-```cpp
-#include <test_utils/macros.hpp>
-
-// Can use EXPECT or ASSERT version of macro
-BURDA_TEST_UTILS_EXPECT_XOR(true, false);
-BURDA_TEST_UTILS_EXPECT_XOR(1, 0);
-BURDA_TEST_UTILS_EXPECT_XOR(-99, 7);
-
-BURDA_TEST_UTILS_ASSERT_XOR(false, true);
+burda::test_utils::lifetime::assert_construction_and_destruction<Foo>();
+burda::test_utils::lifetime::assert_construction_and_destruction<Foo>("bar", 1.0f);
 ```
 
 ### [make_all_members_public.hpp](include/test_utils/make_all_members_public.hpp)
@@ -144,18 +143,18 @@ Test implemented at: [mutex_test.cpp](tests/unit/src/mutex_test.cpp)
 std::mutex lock;
 
 // calls EXPECT_EQ gtest macros inside, should pass
-test_utils::check_if_mutex_is_owned(lock, false));
+test_utils::mutex::check_if_owned(lock, false));
 
 lock.lock();
 
 // this should pass as well
-test_utils::check_if_mutex_is_owned(lock, true);
+test_utils::mutex::check_if_owned(lock, true);
 ```
 
-### [static_class_assertions.hpp](include/test_utils/static_class_assertions.hpp)
-Test implemented at: [static_class_assertions_test.cpp](tests/unit/src/static_class_assertions_test.cpp)
+### [statics.hpp](include/test_utils/statics.hpp)
+Test implemented at: [statics_test.cpp](tests/unit/src/statics_test.cpp)
 ```cpp
-#include <test_utils/static_class_assertions.hpp>
+#include <test_utils/statics.hpp>
 
 struct some_struct
 {
@@ -171,11 +170,11 @@ struct some_struct
 
 // following compile time assertions use "static_assert", "is_default_constructible<T>", etc.
 // "some_struct" should have default constructor
-burda::test_utils::assert_default_constructibility<some_struct, true>();
+burda::test_utils::statics::assert_default_constructibility<some_struct, true>();
 // "some_struct" should be copy constructible
-burda::test_utils::assert_copy_constructibility<some_struct, true>();
+burda::test_utils::statics::assert_copy_constructibility<some_struct, true>();
 // "some_struct" should not be move constructible
-burda::test_utils::assert_move_constructibility<some_struct, false>();
+burda::test_utils::statics::assert_move_constructibility<some_struct, false>();
 ```
 
 ### [time.hpp](include/test_utils/time.hpp)
@@ -184,7 +183,20 @@ Test implemented at: [time_test.cpp](tests/unit/src/time_test.cpp)
 #include <test_utils/time.hpp>
 
 // calls test macros "ASSERT_GE" and "ASSERT_LE" in its implementation
-burda::test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
+burda::test_utils::time::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s);
+```
+
+### [xor.hpp](include/test_utils/xor.hpp)
+Test implemented at: [xor_test.cpp](tests/unit/src/xor_test.cpp)
+```cpp
+#include <test_utils/macros.hpp>
+
+// can use EXPECT or ASSERT version of macro
+BURDA_TEST_UTILS_XOR_EXPECT(true, false);
+BURDA_TEST_UTILS_XOR_EXPECT(1, 0);
+BURDA_TEST_UTILS_XOR_EXPECT(-99, 7);
+
+BURDA_TEST_UTILS_XOR_ASSERT(false, true);
 ```
 
 ## Unit Tests
