@@ -8,7 +8,7 @@ ASSERT_NE(array2, nullptr); \
 \
 for (size_t i = 0; i < size; ++i) \
 { \
-    assert_type(array1[i], array2[i]) << "Assertion failed at index " << std::to_string(i); \
+    assert_type(array1[i], array2[i]) << "Check failed at index " << std::to_string(i); \
 }
 
 #define BURDA_TEST_UTILS_ARRAY_EXPECT_EQUAL(array1, array2, size) _BURDA_TEST_UTILS_ARRAY_FOREACH(array1, array2, size, EXPECT_EQ)
