@@ -12,6 +12,7 @@ add_executable(${PROJECT_NAME} "")
 
 target_sources(${PROJECT_NAME}
                    PRIVATE
+                       ${CMAKE_CURRENT_SOURCE_DIR}/src/array_test.cpp
                        ${CMAKE_CURRENT_SOURCE_DIR}/src/lifetime_test.cpp
                        ${CMAKE_CURRENT_SOURCE_DIR}/src/make_all_members_public_test.cpp
                        ${CMAKE_CURRENT_SOURCE_DIR}/src/xor_test.cpp
