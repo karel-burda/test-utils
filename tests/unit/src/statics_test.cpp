@@ -20,9 +20,9 @@ TEST(statics, constructibility_enabled)
         struct_with_rule_of_five_enabled(struct_with_rule_of_five_enabled &&) = default;
     };
 
-    test_utils::assert_default_constructibility<struct_with_rule_of_five_enabled, true>();
-    test_utils::assert_copy_constructibility<struct_with_rule_of_five_enabled, true>();
-    test_utils::assert_move_constructibility<struct_with_rule_of_five_enabled, true>();
+    test_utils::statics::assert_default_constructibility<struct_with_rule_of_five_enabled, true>();
+    test_utils::statics::assert_copy_constructibility<struct_with_rule_of_five_enabled, true>();
+    test_utils::statics::assert_move_constructibility<struct_with_rule_of_five_enabled, true>();
 }
 
 TEST(statics, constructibility_disabled)
@@ -39,9 +39,9 @@ TEST(statics, constructibility_disabled)
         struct_with_rule_of_five_disabled(struct_with_rule_of_five_disabled &&) = delete;
     };
 
-    test_utils::assert_default_constructibility<struct_with_rule_of_five_disabled, false>();
-    test_utils::assert_copy_constructibility<struct_with_rule_of_five_disabled, false>();
-    test_utils::assert_move_constructibility<struct_with_rule_of_five_disabled, false>();
+    test_utils::statics::assert_default_constructibility<struct_with_rule_of_five_disabled, false>();
+    test_utils::statics::assert_copy_constructibility<struct_with_rule_of_five_disabled, false>();
+    test_utils::statics::assert_move_constructibility<struct_with_rule_of_five_disabled, false>();
 }
 
 TEST(statics, constructibility_mixed)
@@ -58,8 +58,8 @@ TEST(statics, constructibility_mixed)
         struct_with_rule_of_five_mixed(struct_with_rule_of_five_mixed &&) = delete;
     };
 
-    test_utils::assert_default_constructibility<struct_with_rule_of_five_mixed, true>();
-    test_utils::assert_copy_constructibility<struct_with_rule_of_five_mixed, true>();
-    test_utils::assert_move_constructibility<struct_with_rule_of_five_mixed, false>();
+    test_utils::statics::assert_default_constructibility<struct_with_rule_of_five_mixed, true>();
+    test_utils::statics::assert_copy_constructibility<struct_with_rule_of_five_mixed, true>();
+    test_utils::statics::assert_move_constructibility<struct_with_rule_of_five_mixed, false>();
 }
 }

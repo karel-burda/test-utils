@@ -12,5 +12,5 @@ for (size_t i = 0; i < size; ++i) \
     assert_type(array1[i], array2[i]) << "Assertion failed at index " << std::to_string(i); \
 }
 
-#define BURDA_TEST_UTILS_EXPECT_ARRAYS_EQUAL(array1, array2, size) _BURDA_TEST_UTILS_ARRAY_FOREACH(array1, array2, size, EXPECT_EQ)
-#define BURDA_TEST_UTILS_ASSERT_ARRAYS_EQUAL(array1, array2, size) _BURDA_TEST_UTILS_ARRAY_FOREACH(array1, array2, size, ASSERT_EQ)
+#define BURDA_TEST_UTILS_ARRAY_EXPECT_EQUAL(array1, array2, size) _BURDA_TEST_UTILS_ARRAY_FOREACH(array1, array2, size, EXPECT_EQ)
+#define BURDA_TEST_UTILS_ARRAY_ASSERT_EQUAL(array1, array2, size) _BURDA_TEST_UTILS_ARRAY_FOREACH(array1, array2, size, ASSERT_EQ)

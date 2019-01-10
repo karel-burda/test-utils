@@ -10,10 +10,10 @@ TEST(mutex, check_if_mutex_is_owned)
 {
     std::mutex lock;
 
-    test_utils::check_if_mutex_is_owned(lock, false);
+    test_utils::mutex::check_if_owned(lock, false);
 
     lock.lock();
 
-    test_utils::check_if_mutex_is_owned(lock, true);
+    test_utils::mutex::check_if_owned(lock, true);
 }
 }
