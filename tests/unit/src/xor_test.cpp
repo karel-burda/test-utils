@@ -2,7 +2,7 @@
 
 namespace
 {
-TEST(xor, expect)
+TEST(xor_, expect)
 {
     BURDA_TEST_UTILS_XOR_EXPECT(true, false);
     BURDA_TEST_UTILS_XOR_EXPECT(false, true);
@@ -10,7 +10,7 @@ TEST(xor, expect)
     BURDA_TEST_UTILS_XOR_EXPECT(34, -3999);
 }
 
-TEST(xor, assert)
+TEST(xor_, assert)
 {
     BURDA_TEST_UTILS_XOR_ASSERT(true, false);
     BURDA_TEST_UTILS_XOR_ASSERT(false, true);
