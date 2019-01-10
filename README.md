@@ -87,11 +87,11 @@ Test implemented at: [array_test.cpp](tests/unit/src/array_test.cpp)
 ```cpp
 #include <test_utils/array.hpp>
 
-int array1 = { 1, 2, 3 };
-int array2 = { 1, 2, 3 };
+const int array1[] = { 1, 2, 3 };
+const int array2[] = { 1, 2, 3 };
 
-BURDA_TEST_UTILS_EXPECT_ARRAYS_EQUAL(array1, array2, 3);
-BURDA_TEST_UTILS_ASSERT_ARRAYS_EQUAL(array1, array2, 3);
+BURDA_TEST_UTILS_ARRAY_EXPECT_EQUAL(array1, array2, 3);
+BURDA_TEST_UTILS_ARRAY_ASSERT_EQUAL(array1, array2, 3);
 ```
 
 ### [lifetime.hpp](include/test_utils/lifetime.hpp)
