@@ -6,6 +6,8 @@ namespace burda
 {
 namespace test_utils
 {
+namespace statics
+{
 template <typename class_type, const bool constructible>
 void assert_default_constructibility()
 {
@@ -29,6 +31,7 @@ void assert_copy_constructibility()
                   "Given class_type has incorrect copy constructibility");
     static_assert(std::is_copy_assignable<class_type>::value == constructible,
                   "Given class_type has incorrect copy assignability");
+}
 }
 }
 }

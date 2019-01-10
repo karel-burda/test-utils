@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 
-#include <test_utils/static_class_assertions.hpp>
+#include <test_utils/statics.hpp>
 
 namespace
 {
 namespace test_utils = burda::test_utils;
 
-TEST(static_class_assertions, constructibility_enabled)
+TEST(statics, constructibility_enabled)
 {
     struct struct_with_rule_of_five_enabled
     {
@@ -20,12 +20,12 @@ TEST(static_class_assertions, constructibility_enabled)
         struct_with_rule_of_five_enabled(struct_with_rule_of_five_enabled &&) = default;
     };
 
-    test_utils::assert_default_constructibility<struct_with_rule_of_five_enabled, true>();
-    test_utils::assert_copy_constructibility<struct_with_rule_of_five_enabled, true>();
-    test_utils::assert_move_constructibility<struct_with_rule_of_five_enabled, true>();
+    test_utils::statics::assert_default_constructibility<struct_with_rule_of_five_enabled, true>();
+    test_utils::statics::assert_copy_constructibility<struct_with_rule_of_five_enabled, true>();
+    test_utils::statics::assert_move_constructibility<struct_with_rule_of_five_enabled, true>();
 }
 
-TEST(static_class_assertions, constructibility_disabled)
+TEST(statics, constructibility_disabled)
 {
     struct struct_with_rule_of_five_disabled
     {
@@ -39,12 +39,12 @@ TEST(static_class_assertions, constructibility_disabled)
         struct_with_rule_of_five_disabled(struct_with_rule_of_five_disabled &&) = delete;
     };
 
-    test_utils::assert_default_constructibility<struct_with_rule_of_five_disabled, false>();
-    test_utils::assert_copy_constructibility<struct_with_rule_of_five_disabled, false>();
-    test_utils::assert_move_constructibility<struct_with_rule_of_five_disabled, false>();
+    test_utils::statics::assert_default_constructibility<struct_with_rule_of_five_disabled, false>();
+    test_utils::statics::assert_copy_constructibility<struct_with_rule_of_five_disabled, false>();
+    test_utils::statics::assert_move_constructibility<struct_with_rule_of_five_disabled, false>();
 }
 
-TEST(static_class_assertions, constructibility_mixed)
+TEST(statics, constructibility_mixed)
 {
     struct struct_with_rule_of_five_mixed
     {
@@ -58,8 +58,8 @@ TEST(static_class_assertions, constructibility_mixed)
         struct_with_rule_of_five_mixed(struct_with_rule_of_five_mixed &&) = delete;
     };
 
-    test_utils::assert_default_constructibility<struct_with_rule_of_five_mixed, true>();
-    test_utils::assert_copy_constructibility<struct_with_rule_of_five_mixed, true>();
-    test_utils::assert_move_constructibility<struct_with_rule_of_five_mixed, false>();
+    test_utils::statics::assert_default_constructibility<struct_with_rule_of_five_mixed, true>();
+    test_utils::statics::assert_copy_constructibility<struct_with_rule_of_five_mixed, true>();
+    test_utils::statics::assert_move_constructibility<struct_with_rule_of_five_mixed, false>();
 }
 }

@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
-project(test-utils VERSION 1.1.2 LANGUAGES CXX)
+project(test-utils VERSION 1.2.0 LANGUAGES CXX)
 
 add_library(${PROJECT_NAME} INTERFACE)
 
 target_sources(${PROJECT_NAME}
                    INTERFACE
-                       ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/lifetime_assertions.hpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/lifetime.hpp
                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/make_all_members_public.hpp
-                       ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/static_class_assertions.hpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/statics.hpp
                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/time.hpp
-                       ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/macros.hpp)
+                       ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/xor.hpp)
 
 target_include_directories(${PROJECT_NAME}
                                INTERFACE

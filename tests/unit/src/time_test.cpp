@@ -9,7 +9,7 @@ namespace test_utils = burda::test_utils;
 
 TEST(time, assert_that_elapsed_time_in_tolerance)
 {
-    EXPECT_NO_THROW(test_utils::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s));
-    EXPECT_NO_THROW(test_utils::assert_that_elapsed_time_in_tolerance(100ms, 100ms, 100ms));
+    EXPECT_NO_THROW(test_utils::time::assert_that_elapsed_time_in_tolerance(7s, 5s, 9s));
+    EXPECT_NO_THROW(test_utils::time::assert_that_elapsed_time_in_tolerance(100ms, 100ms, 100ms));
 }
 }
