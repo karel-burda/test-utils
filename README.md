@@ -143,7 +143,7 @@ Test implemented at: [mutex_test.cpp](tests/unit/src/mutex_test.cpp)
 std::mutex lock;
 
 // calls EXPECT_EQ gtest macros inside, should pass
-test_utils::mutex::check_if_owned(lock, false));
+test_utils::mutex::check_if_owned(lock, false);
 
 lock.lock();
 
