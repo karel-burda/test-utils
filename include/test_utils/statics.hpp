@@ -9,14 +9,14 @@ namespace test_utils
 namespace statics
 {
 template <typename class_type, const bool constructible>
-void assert_default_constructibility()
+constexpr void assert_default_constructibility()
 {
     static_assert(std::is_default_constructible<class_type>::value == constructible,
                   "Given class_type has incorrect constructibility");
 }
 
 template <typename class_type, const bool constructible>
-void assert_move_constructibility()
+constexpr void assert_move_constructibility()
 {
     static_assert(std::is_move_constructible<class_type>::value == constructible,
                   "Given class_type has incorrect move constructibility");
@@ -25,7 +25,7 @@ void assert_move_constructibility()
 }
 
 template <typename class_type, const bool constructible>
-void assert_copy_constructibility()
+constexpr void assert_copy_constructibility()
 {
     static_assert(std::is_copy_constructible<class_type>::value == constructible,
                   "Given class_type has incorrect copy constructibility");

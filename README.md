@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-1.2.2-blue.svg)
+![Version](https://img.shields.io/badge/version-1.2.3-blue.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-blue.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/test-utils.svg?branch=master)](https://travis-ci.org/karel-burda/test-utils)
 [![Codecov Status](https://codecov.io/gh/karel-burda/test-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/karel-burda/test-utils/branch/master)
@@ -143,7 +143,7 @@ Test implemented at: [mutex_test.cpp](tests/unit/src/mutex_test.cpp)
 std::mutex lock;
 
 // calls EXPECT_EQ gtest macros inside, should pass
-test_utils::mutex::check_if_owned(lock, false));
+test_utils::mutex::check_if_owned(lock, false);
 
 lock.lock();
 
