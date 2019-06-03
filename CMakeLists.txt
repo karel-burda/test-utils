@@ -6,8 +6,10 @@ add_library(${PROJECT_NAME} INTERFACE)
 
 target_sources(${PROJECT_NAME}
                    INTERFACE
+                       ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/array.hpp
                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/lifetime.hpp
                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/make_all_members_public.hpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/mutex.hpp
                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/statics.hpp
                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/time.hpp
                        ${CMAKE_CURRENT_SOURCE_DIR}/include/test_utils/xor.hpp)
